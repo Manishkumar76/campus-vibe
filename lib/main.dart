@@ -1,3 +1,4 @@
+import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
 import 'Pages/EventPage.dart';
 import 'Pages/addNewEvent.dart';
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
+    const HomeScreen(),
     SearchPage(),
     EventFormPage(), // Replace this with the imported EventPage
     Center(child: Text('Live Page', style: TextStyle(fontSize: 24))),
