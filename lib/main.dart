@@ -1,3 +1,4 @@
+import 'package:campus_vibe/Pages/live.dart';
 import 'package:flutter/material.dart';
 import 'Pages/EventPage.dart';
 import 'Pages/addNewEvent.dart';
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
     SearchPage(),
     EventFormPage(), // Replace this with the imported EventPage
-    Center(child: Text('Live Page', style: TextStyle(fontSize: 24))),
+    LivePage(),
     ProfilePage(),
   ];
 
