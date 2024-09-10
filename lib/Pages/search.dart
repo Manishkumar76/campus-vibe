@@ -41,11 +41,11 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
                           blurRadius: 8.0,
-                          offset: Offset(0, 4), // Shadow position
+                          offset: const Offset(0, 4), // Shadow position
                         ),
                       ],
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         hintText: 'Search events...',
                         prefixIcon: Icon(Icons.search, color: Colors.grey),

@@ -1,4 +1,5 @@
-import 'package:campus_vibe/Pages/live.dart';
+import 'package:campus_vibe/Pages/live.dart'
+import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
 import 'Pages/EventPage.dart';
 import 'Pages/addNewEvent.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 6, 33, 63)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 6, 33, 63)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Campus Vibe'),
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
+    const HomeScreen(),
     SearchPage(),
     EventFormPage(), // Replace this with the imported EventPage
     LivePage(),
@@ -61,41 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final Color highlightedIconColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0), // Height of the AppBar
-        child: Container(
-          margin: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color:highlightedIconColor,
-            borderRadius: BorderRadius.circular(16.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
-            elevation: 0,
-            title: Text(widget.title),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotificationPage()),
-                  );
-                },
-              ),
-            ],
-            toolbarHeight: 80.0, // Adjust as needed
-          ),
-        ),
-      ),
       body: Stack(
         children: [
           IndexedStack(
