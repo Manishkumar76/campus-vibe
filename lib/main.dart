@@ -61,41 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final Color highlightedIconColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0), // Height of the AppBar
-        child: Container(
-          margin: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color:highlightedIconColor,
-            borderRadius: BorderRadius.circular(16.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: AppBar(
-            backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
-            elevation: 0,
-            title: Text(widget.title),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotificationPage()),
-                  );
-                },
-              ),
-            ],
-            toolbarHeight: 80.0, // Adjust as needed
-          ),
-        ),
-      ),
       body: Stack(
         children: [
           IndexedStack(
