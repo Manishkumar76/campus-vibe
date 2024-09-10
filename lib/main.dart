@@ -1,9 +1,8 @@
-import 'package:campus_vibe/Pages/live.dart'
+import 'package:campus_vibe/Pages/live.dart';
 import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
 import 'Pages/EventPage.dart';
 import 'Pages/addNewEvent.dart';
-import 'Pages/notificationPage.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
 
