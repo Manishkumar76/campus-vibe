@@ -47,7 +47,7 @@ class _EventFormPageState extends State<EventFormPage> {
           DraggableScrollableSheet(
             initialChildSize: 0.55, // Start with the drawer showing 55% of the screen
             minChildSize: 0.55, // Minimum drawer size
-            maxChildSize: 0.95, // Maximum drawer size when dragged upwards
+            maxChildSize: 1, // Maximum drawer size when dragged upwards
             builder: (BuildContext context, ScrollController scrollController) {
               return NotificationListener<DraggableScrollableNotification>(
                 onNotification: (notification) {
@@ -70,8 +70,8 @@ class _EventFormPageState extends State<EventFormPage> {
                       // Arrow icon at the top
                       Center(
                         child: Icon(
-                          Icons.keyboard_arrow_up, // Arrow icon
-                          size: 30.0,
+                          Icons.horizontal_rule_rounded, // Arrow icon
+                          size: 50.0,
                           color: Colors.grey,
                         ),
                       ),
@@ -145,7 +145,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text("Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
+                            Text("Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world. Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world. Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
                             SizedBox(height: 20),
                             Center(
                               child: ElevatedButton(
