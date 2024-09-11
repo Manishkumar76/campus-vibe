@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'Pages/addNewEvent.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
+import 'Pages/splashScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +17,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Campus Vibe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 6, 33, 63)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Campus Vibe'),
+      home:  SplashScreen(),
     );
   }
 }
