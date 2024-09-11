@@ -19,8 +19,10 @@ class _EventFormPageState extends State<EventFormPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Event Name',
-            style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Event Name',
+          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.indigo,
         leading: IconButton(
           color: Colors.white,
@@ -32,8 +34,8 @@ class _EventFormPageState extends State<EventFormPage> {
       ),
       body: Stack(
         children: <Widget>[
-          // The background image
-          Container(
+          // The background image with blur effect
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             child: Stack(
               alignment: Alignment.topCenter,
@@ -89,79 +91,83 @@ class _EventFormPageState extends State<EventFormPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            // The form fields
-                            Text(
-                              "Name of Event",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                            // Event Details using ListTile
+                            ListTile(
+                              leading: Icon(Icons.event),
+                              title: Text(
+                                "Name of Event",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo,
+                                ),
                               ),
+                              subtitle: Text("Tech Symposium 2024"),
                             ),
-                            SizedBox(height: 5),
-                            Text("Tech Symposium 2024"),
-                            SizedBox(height: 10),
-                            Text(
-                              "Event's Registration Date",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                            ListTile(
+                              leading: Icon(Icons.calendar_today),
+                              title: Text(
+                                "Event's Registration Date",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo,
+                                ),
                               ),
+                              subtitle: Text("01-06-2024 - 15-06-2024"),
                             ),
-                            SizedBox(height: 5),
-                            Text("01-06-2024 - 15-06-2024"),
-                            SizedBox(height: 10),
-                            Text(
-                              "Event's Date",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                            ListTile(
+                              leading: Icon(Icons.event_available),
+                              title: Text(
+                                "Event's Date",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo,
+                                ),
                               ),
+                              subtitle: Text("20-06-2024"),
                             ),
-                            SizedBox(height: 5),
-                            Text("20-06-2024"),
-                            SizedBox(height: 10),
-                            Text(
-                              "Time",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                            ListTile(
+                              leading: Icon(Icons.access_time),
+                              title: Text(
+                                "Time",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo,
+                                ),
                               ),
+                              subtitle: Text("09:00 AM"),
                             ),
-                            SizedBox(height: 5),
-                            Text("09:00 AM"),
-                            SizedBox(height: 10),
-                            Text(
-                              "Venue",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                            ListTile(
+                              leading: Icon(Icons.location_on),
+                              title: Text(
+                                "Venue",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo,
+                                ),
                               ),
+                              subtitle: Text("Conference Room"),
                             ),
-                            SizedBox(height: 5),
-                            Text("Conference Room"),
-                            SizedBox(height: 10),
+                            SizedBox(height: 10,),
+                Text(
+                  "Description",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.indigo,
+                  ),
+                ),
                             Text(
-                              "Description",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world.",
-                            ),
-                            SizedBox(height: 20),
+                                "Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
+
                           ],
                         ),
                       ),
-                      // Winners List
+                      // Winners Section
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: Column(
@@ -257,8 +263,17 @@ class _EventFormPageState extends State<EventFormPage> {
 
   // Function to display a dialog and add a new winner to the list
   void _addWinnerDialog() {
-    TextEditingController winnerController = TextEditingController();
+    String? selectedWinner;
     String? selectedPosition;
+
+    // Sample list of participants to choose from
+    List<String> participants = [
+      "John Doe",
+      "Jane Smith",
+      "Michael Johnson",
+      "Emily Davis",
+      "David Wilson"
+    ];
 
     showDialog(
       context: context,
@@ -268,10 +283,25 @@ class _EventFormPageState extends State<EventFormPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(
-                controller: winnerController,
-                decoration: const InputDecoration(hintText: "Enter Winner's Name"),
+              // Dropdown for selecting the winner from the participants list
+              DropdownButtonFormField<String>(
+                value: selectedWinner,
+                items: participants.map((String participant) {
+                  return DropdownMenuItem<String>(
+                    value: participant,
+                    child: Text(participant),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedWinner = newValue;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Select Winner',
+                ),
               ),
+              // Dropdown for selecting the winner's position
               DropdownButtonFormField<String>(
                 value: selectedPosition,
                 items: ["Gold", "Silver", "Bronze"].map((String position) {
@@ -302,9 +332,9 @@ class _EventFormPageState extends State<EventFormPage> {
               child: const Text("Add"),
               onPressed: () {
                 setState(() {
-                  if (winnerController.text.isNotEmpty && selectedPosition != null) {
+                  if (selectedWinner != null && selectedPosition != null) {
                     winners.add({
-                      "name": winnerController.text,
+                      "name": selectedWinner!,
                       "position": selectedPosition!
                     });
                   }
@@ -317,4 +347,5 @@ class _EventFormPageState extends State<EventFormPage> {
       },
     );
   }
+
 }
