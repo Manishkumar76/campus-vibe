@@ -1,97 +1,153 @@
 import 'package:flutter/material.dart';
 import 'EventPage.dart';
 
-class EventListPage extends StatelessWidget {
-  final List<Map<String, String>> events = [
+class EventListPage extends StatefulWidget {
+  @override
+  _EventListPageState createState() => _EventListPageState();
+}
+
+class _EventListPageState extends State<EventListPage> {
+  final List<Map<String, String>> allEvents = [
     {
       'title': 'Tech Symposium 2024',
       'image': 'assets/images/backgrondimage.jpg',
       'date': '20-06-2024',
+      'category': 'Technical',
       'description': 'A tech symposium to discuss the latest trends in technology.'
     },
     {
-      'title': 'Tech Symposium 2024',
+      'title': 'Cultural Fest 2024',
       'image': 'assets/images/backgrondimage.jpg',
-      'date': '20-06-2024',
-      'description': 'A tech symposium to discuss the latest trends in technology.'
+      'date': '25-06-2024',
+      'category': 'Cultural',
+      'description': 'A fest celebrating diverse cultures and performances.'
     },
     {
-      'title': 'Tech Symposium 2024',
+      'title': 'Literary Meetup 2024',
       'image': 'assets/images/backgrondimage.jpg',
-      'date': '20-06-2024',
-      'description': 'A tech symposium to discuss the latest trends in technology.'
+      'date': '10-07-2024',
+      'category': 'Literature',
+      'description': 'A gathering of literary minds to discuss and debate.'
     },
     {
-      'title': 'Tech Symposium 2024',
+      'title': 'Management Summit 2024',
       'image': 'assets/images/backgrondimage.jpg',
-      'date': '20-06-2024',
-      'description': 'A tech symposium to discuss the latest trends in technology.'
+      'date': '15-07-2024',
+      'category': 'Management',
+      'description': 'A summit for future business leaders and managers.'
     },
     // Add more events here
   ];
 
+  String selectedCategory = 'All'; // Default category is 'All'
+
   @override
   Widget build(BuildContext context) {
+    List<Map<String, String>> filteredEvents = selectedCategory == 'All'
+        ? allEvents
+        : allEvents.where((event) => event['category'] == selectedCategory).toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Events'),
         backgroundColor: Colors.blueAccent,
       ),
-      body: ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          final event = events[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EventFormPage(),
-                ),
-              );
-            },
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15), // For rounded corners
-              ),
-              margin: EdgeInsets.all(10),
-              child: Column(
+      body: Column(
+        children: [
+          // Category filter buttons
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    child: Container(
-                      height: 250, // Set the height you want
-                      width: double.infinity, // Ensure it takes up full width
-                      child: Image.asset(
-                        event['image']!,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          event['title']!,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 5),
-                        Text('Date: ${event['date']}'),
-                        SizedBox(height: 5),
-                        Text('Description: ${event['description']}'),
-                      ],
-                    ),
-                  ),
+                  _buildCategoryButton('All'),
+                  _buildCategoryButton('Technical'),
+                  _buildCategoryButton('Cultural'),
+                  _buildCategoryButton('Literature'),
+                  _buildCategoryButton('Management'),
                 ],
               ),
             ),
-          );
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredEvents.length,
+              itemBuilder: (context, index) {
+                final event = filteredEvents[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventFormPage(),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    margin: EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                          child: Container(
+                            height: 250,
+                            width: double.infinity,
+                            child: Image.asset(
+                              event['image']!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                event['title']!,
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 5),
+                              Text('Date: ${event['date']}'),
+                              SizedBox(height: 5),
+                              Text('Description: ${event['description']}'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Widget for category buttons
+  Widget _buildCategoryButton(String category) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            selectedCategory = category;
+          });
         },
+        child: Text(category),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: selectedCategory == category ? Colors.blueAccent : Colors.grey,
+        ),
       ),
     );
   }
