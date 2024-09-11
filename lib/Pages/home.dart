@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe',
       name: 'TechFest 2024',
       description:
-          'An annual tech festival featuring coding competitions, hackathons, and workshops.',
+      'An annual tech festival featuring coding competitions, hackathons, and workshops.',
       eventRegisterStartDate: DateTime(2024, 10, 1),
       eventRegisterEndDate: DateTime(2024, 10, 10),
       eventStartDate: DateTime(2024, 10, 15),
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1580489944761-15a19d654956',
       name: 'Cultural Fest',
       description:
-          'A celebration of music, dance, and drama showcasing the diverse cultures of students.',
+      'A celebration of music, dance, and drama showcasing the diverse cultures of students.',
       eventRegisterStartDate: DateTime(2024, 11, 1),
       eventRegisterEndDate: DateTime(2024, 11, 10),
       eventStartDate: DateTime(2024, 11, 15),
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1553531580-3506c60f1822',
       name: 'Annual Sports Meet',
       description:
-          'A week-long event featuring various sports competitions including athletics, football, and basketball.',
+      'A week-long event featuring various sports competitions including athletics, football, and basketball.',
       eventRegisterStartDate: DateTime(2024, 12, 1),
       eventRegisterEndDate: DateTime(2024, 12, 10),
       eventStartDate: DateTime(2024, 12, 20),
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1567767292225-10e2dcf3ea10',
       name: 'Robotics Workshop',
       description:
-          'A hands-on workshop focusing on building and programming robots for various tasks.',
+      'A hands-on workshop focusing on building and programming robots for various tasks.',
       eventRegisterStartDate: DateTime(2024, 9, 1),
       eventRegisterEndDate: DateTime(2024, 9, 5),
       eventStartDate: DateTime(2024, 9, 10),
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1542145936-f758a8d9b79b',
       name: 'Innovation Day',
       description:
-          'A showcase of innovative projects by students across various disciplines.',
+      'A showcase of innovative projects by students across various disciplines.',
       eventRegisterStartDate: DateTime(2024, 9, 15),
       eventRegisterEndDate: DateTime(2024, 9, 25),
       eventStartDate: DateTime(2024, 10, 1),
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1529612700005-f77199c78f62',
       name: 'Environmental Day',
       description:
-          'A day dedicated to raising awareness about environmental issues through talks and activities.',
+      'A day dedicated to raising awareness about environmental issues through talks and activities.',
       eventRegisterStartDate: DateTime(2024, 10, 5),
       eventRegisterEndDate: DateTime(2024, 10, 10),
       eventStartDate: DateTime(2024, 10, 15),
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
       name: 'Art Exhibition',
       description:
-          'An exhibition showcasing artworks created by students, including paintings, sculptures, and digital art.',
+      'An exhibition showcasing artworks created by students, including paintings, sculptures, and digital art.',
       eventRegisterStartDate: DateTime(2024, 11, 5),
       eventRegisterEndDate: DateTime(2024, 11, 10),
       eventStartDate: DateTime(2024, 11, 20),
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1517059224940-d4af9eec41e4',
       name: 'Guest Lecture on AI',
       description:
-          'A guest lecture by an industry expert on the latest trends and advancements in Artificial Intelligence.',
+      'A guest lecture by an industry expert on the latest trends and advancements in Artificial Intelligence.',
       eventRegisterStartDate: DateTime(2024, 9, 20),
       eventRegisterEndDate: DateTime(2024, 9, 25),
       eventStartDate: DateTime(2024, 9, 30),
@@ -168,13 +168,13 @@ class _HomeScreenState extends State<HomeScreen> {
       photo2: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d',
       name: 'Hackathon 2024',
       description:
-          'A 24-hour coding competition where teams develop innovative solutions to real-world problems.',
+      'A 24-hour coding competition where teams develop innovative solutions to real-world problems.',
       eventRegisterStartDate: DateTime(2024, 11, 1),
       eventRegisterEndDate: DateTime(2024, 11, 5),
       eventStartDate: DateTime(2024, 11, 10),
       eventEndDate: DateTime(2024, 11, 11),
-      eventStartTime: '10:00 AM',
-      totalParticipant: 200,
+      eventStartTime: '02:00 PM',
+      totalParticipant: 150,
       departmentId: 109,
       categoryId: 209,
       organizerId: 309,
@@ -182,24 +182,25 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 10,
-      mainImage: 'https://images.unsplash.com/photo-1527280977801-2a3a049526dc',
-      photo1: 'https://images.unsplash.com/photo-1496317556649-4babb4a4f2b9',
-      photo2: 'https://images.unsplash.com/photo-1507149833265-60c372daea22',
-      name: 'Alumni Meet',
+      mainImage: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
+      photo1: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
+      photo2: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
+      name: 'Entrepreneurship Summit',
       description:
-          'An event where alumni return to their alma mater to share their experiences and network with current students.',
-      eventRegisterStartDate: DateTime(2024, 12, 5),
+      'A summit featuring talks and workshops by successful entrepreneurs, aimed at inspiring students to start their own ventures.',
+      eventRegisterStartDate: DateTime(2024, 12, 1),
       eventRegisterEndDate: DateTime(2024, 12, 10),
-      eventStartDate: DateTime(2024, 12, 20),
-      eventEndDate: DateTime(2024, 12, 20),
-      eventStartTime: '05:00 PM',
-      totalParticipant: 300,
+      eventStartDate: DateTime(2024, 12, 15),
+      eventEndDate: DateTime(2024, 12, 16),
+      eventStartTime: '09:00 AM',
+      totalParticipant: 200,
       departmentId: 110,
       categoryId: 210,
       organizerId: 310,
       venueId: 410,
     ),
   ];
+
 // Default icon color
   final Color defaultIconColor = Colors.grey;
   // Highlighted icon color
@@ -226,10 +227,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: AppBar(
               backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
               elevation: 0,
-              title: const Text("Campus Vibe"),
+              title: const Text("Campus Vibe",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
               actions: [
                 IconButton(
-                  icon: Icon(Icons.notifications),
+                  color: Colors.white,
+                  icon: const Icon(Icons.notifications),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -253,8 +255,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                const Text("Winners...",style: TextStyle(fontWeight:FontWeight.bold ,fontSize: 15),),
-                TextButton(onPressed: (){}, child: const Text('See All',style: TextStyle(fontSize: 14),))
+                const Text("Winners...",style: TextStyle(fontWeight:FontWeight.bold ,fontSize: 20),),
+                TextButton(onPressed: (){}, child: const Text('See All',style: TextStyle(fontSize: 15),))
               ],),
               _buildWinnerGrid(),
               _buildCategoryBar(),
@@ -276,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'Categories',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 15,
+                fontSize: 20,
               ),
             ),
             TextButton(
@@ -284,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text(
                 'See All',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                 ),
               ),
             ),
@@ -325,52 +327,55 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   Widget _buildInitialBar() {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              'Hi,',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Colors.indigo ,
-                fontSize: 20,
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Hi,',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.indigo ,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            Text(
-              'User! 👋',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Colors.indigo,
-                fontSize: 20,
+              Text(
+                'User! 👋',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.indigo,
+                  fontSize: 20,
+                ),
               ),
-            ),
-          ],
-        ),
-        SizedBox(height: 3),
-        Text(
-          'Explore more and participate',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 10,
+            ],
           ),
-        ),
-      ],
+          SizedBox(height: 3),
+          Text(
+            'Explore more and participate',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 10,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildWinnerGrid() {
     return SizedBox(
-      height: 250.0, // Set a fixed height for the grid
+      height: 400.0, // Set a fixed height for the grid
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(), // Grid won't scroll
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, // Number of columns
-          crossAxisSpacing: 12.0, // Space between columns
-          mainAxisSpacing: 15.0, // Space between rows
+          crossAxisSpacing: 10.0, // Space between columns
+          mainAxisSpacing: 8.0, // Space between rows
           childAspectRatio: 0.7, // Adjust aspect ratio to control height
         ),
         itemCount: 6, // Number of items in the grid
@@ -379,6 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: Container(
+                  height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0), // Rounded corners
                     color: Colors.grey[200], // Background color
@@ -407,7 +413,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildEventList() {
     return SizedBox(
-      // height: double.infinity,
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -428,10 +433,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                      mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                    SizedBox(height: 190,
+                    SizedBox(height: 200,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Image.network(event.mainImage,fit: BoxFit.cover,)),
+                          child: Image.network(event.mainImage,fit: BoxFit.fill,)),
                     ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(16.0),
