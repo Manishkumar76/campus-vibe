@@ -41,54 +41,54 @@ class EventListPage extends StatelessWidget {
         itemCount: events.length,
         itemBuilder: (context, index) {
           final event = events[index];
-          return Card(
-            margin: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Container(
-                  height: 250, // Set the height you want
-                  width: double.infinity, // Ensure it takes up full width
-                  child: Image.asset(
-                    event['image']!,
-                    fit: BoxFit.cover,
-                  ),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EventFormPage(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        event['title']!,
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              );
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15), // For rounded corners
+              ),
+              margin: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                    child: Container(
+                      height: 250, // Set the height you want
+                      width: double.infinity, // Ensure it takes up full width
+                      child: Image.asset(
+                        event['image']!,
+                        fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 5),
-                      Text('Date: ${event['date']}'),
-                      SizedBox(height: 5),
-                      Text('Description: ${event['description']}'),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EventFormPage(),
-                              ),
-                            );
-                          },
-                          child: Text('View Details'),
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Colors.blueAccent,
-                          ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          event['title']!,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 5),
+                        Text('Date: ${event['date']}'),
+                        SizedBox(height: 5),
+                        Text('Description: ${event['description']}'),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
