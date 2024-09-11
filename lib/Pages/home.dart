@@ -1,6 +1,6 @@
+import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:flutter/material.dart';
 import '../Models/event_model.dart';
-import 'EventPage.dart';
 import 'notificationPage.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -462,7 +462,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EventFormPage(),
+                          builder: (context) => EventListPage(),
                         ),
                       );
                     },
