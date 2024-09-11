@@ -12,19 +12,27 @@ class _EventFormPageState extends State<EventFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Event Details'),
+        backgroundColor: Colors.blueAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back to the event list page
+          },
+        ),
+      ),
       body: Stack(
         children: <Widget>[
           // The background image
           Container(
             height: MediaQuery.of(context).size.height,
             child: Stack(
+              alignment: Alignment.topCenter,
               children: [
                 Image.asset(
                   'assets/images/backgrondimage.jpg', // Add your image here
                   fit: BoxFit.cover,
-
-                  // height: MediaQuery.of(context).size.height,
-                  // width: MediaQuery.of(context).size.width,
                 ),
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: _blurAmount, sigmaY: _blurAmount),
@@ -37,14 +45,14 @@ class _EventFormPageState extends State<EventFormPage> {
           ),
           // The DraggableScrollableSheet (drawer)
           DraggableScrollableSheet(
-            initialChildSize: 0.4, // Start with the drawer showing 40% of the screen
-            minChildSize: 0.4, // Minimum drawer size
-            maxChildSize: 0.9, // Maximum drawer size when dragged upwards
+            initialChildSize: 0.55, // Start with the drawer showing 55% of the screen
+            minChildSize: 0.55, // Minimum drawer size
+            maxChildSize: 0.95, // Maximum drawer size when dragged upwards
             builder: (BuildContext context, ScrollController scrollController) {
               return NotificationListener<DraggableScrollableNotification>(
                 onNotification: (notification) {
                   setState(() {
-                    _blurAmount = (notification.extent - 0.4) * 10; // Control the blur amount dynamically
+                    _blurAmount = (notification.extent - 0.55) * 10; // Control the blur amount dynamically
                   });
                   return true;
                 },
@@ -59,6 +67,14 @@ class _EventFormPageState extends State<EventFormPage> {
                   child: ListView(
                     controller: scrollController,
                     children: <Widget>[
+                      // Arrow icon at the top
+                      Center(
+                        child: Icon(
+                          Icons.keyboard_arrow_up, // Arrow icon
+                          size: 30.0,
+                          color: Colors.grey,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
@@ -70,7 +86,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -81,7 +97,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -92,7 +108,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -103,7 +119,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -114,7 +130,7 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
@@ -125,18 +141,23 @@ class _EventFormPageState extends State<EventFormPage> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.purple,
+                                color: Colors.lightBlue,
                               ),
                             ),
                             SizedBox(height: 5),
-                            Text("Description for Tech Symposium 2024"),
+                            Text("Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
                             SizedBox(height: 20),
                             Center(
                               child: ElevatedButton(
                                 onPressed: () {},
-                                child: Text('Participate'),
+                                child: Text(
+                                  'Participate',
+                                  style: TextStyle(
+                                    color: Colors.white, // Set the desired text color here
+                                  ),
+                                ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.grey,
+                                  backgroundColor: Colors.blueAccent, // Background color of the button
                                   shape: StadiumBorder(),
                                 ),
                               ),

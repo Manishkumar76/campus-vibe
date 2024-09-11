@@ -1,7 +1,7 @@
+import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:campus_vibe/Pages/live.dart';
 import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
-import 'Pages/EventPage.dart';
 import 'Pages/addNewEvent.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     SearchPage(),
-    EventFormPage(), // Replace this with the imported EventPage
+    EventListPage(), // Replace this with the imported EventPage
     LivePage(),
     ProfilePage(),
   ];
