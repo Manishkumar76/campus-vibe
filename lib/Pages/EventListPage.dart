@@ -46,7 +46,7 @@ class EventListPage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  // height: 250, // Set the height you want
+                  height: 250, // Set the height you want
                   width: double.infinity, // Ensure it takes up full width
                   child: Image.asset(
                     event['image']!,
