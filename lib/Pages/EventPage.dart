@@ -47,7 +47,7 @@ class _EventFormPageState extends State<EventFormPage> {
           DraggableScrollableSheet(
             initialChildSize: 0.55, // Start with the drawer showing 55% of the screen
             minChildSize: 0.55, // Minimum drawer size
-            maxChildSize: 0.98, // Maximum drawer size when dragged upwards
+            maxChildSize: 1, // Maximum drawer size when dragged upwards
             builder: (BuildContext context, ScrollController scrollController) {
               return NotificationListener<DraggableScrollableNotification>(
                 onNotification: (notification) {
