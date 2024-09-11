@@ -47,106 +47,132 @@ class _EventListPageState extends State<EventListPage> {
         ? allEvents
         : allEvents.where((event) => event['category'] == selectedCategory).toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Events'),
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: Column(
-        children: [
-          // Category filter buttons
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildCategoryButton('All'),
-                  _buildCategoryButton('Technical'),
-                  _buildCategoryButton('Cultural'),
-                  _buildCategoryButton('Literature'),
-                  _buildCategoryButton('Management'),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        appBar:PreferredSize(
+          preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+          child: Container(
+            margin: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color:Colors.indigo,
+              borderRadius: BorderRadius.circular(16.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: AppBar(
+              backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
+              elevation: 0,
+              title: const Text("Events",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+              centerTitle: true,
+              toolbarHeight: 80.0, // Adjust as needed
+            ),
+          ),
+        ),
+        body: Column(
+          children: [
+            // Category filter buttons
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildCategoryButton('All'),
+                    _buildCategoryButton('Technical'),
+                    _buildCategoryButton('Cultural'),
+                    _buildCategoryButton('Literature'),
+                    _buildCategoryButton('Management'),
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredEvents.length,
-              itemBuilder: (context, index) {
-                final event = filteredEvents[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EventFormPage(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filteredEvents.length,
+                itemBuilder: (context, index) {
+                  final event = filteredEvents[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventFormPage(),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    );
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
-                          child: Container(
-                            height: 250,
-                            width: double.infinity,
-                            child: Image.asset(
-                              event['image']!,
-                              fit: BoxFit.cover,
+                      margin: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                            child: Container(
+                              height: 250,
+                              width: double.infinity,
+                              child: Image.asset(
+                                event['image']!,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                event['title']!,
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 5),
-                              Text('Date: ${event['date']}'),
-                              SizedBox(height: 5),
-                              Text('Description: ${event['description']}'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  event['title']!,
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 5),
+                                Text('Date: ${event['date']}'),
+                                SizedBox(height: 5),
+                                Text('Description: ${event['description']}'),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   // Widget for category buttons
   Widget _buildCategoryButton(String category) {
+
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ElevatedButton(
         onPressed: () {
+
           setState(() {
             selectedCategory = category;
           });
         },
-        child: Text(category),
+        child: Text(category,style: TextStyle(color: selectedCategory==category? Colors.white:Colors.indigo),),
         style: ElevatedButton.styleFrom(
-          backgroundColor: selectedCategory == category ? Colors.blueAccent : Colors.grey,
+          backgroundColor: selectedCategory == category ? Colors.indigo : Colors.white,
         ),
       ),
     );

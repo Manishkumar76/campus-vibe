@@ -16,267 +16,285 @@ class _EventFormPageState extends State<EventFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Event Name',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.indigo,
-        leading: IconButton(
-          color: Colors.white,
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the event list page
-          },
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          // The background image with blur effect
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Image.asset(
-                  'assets/images/backgrondimage.jpg', // Add your image here
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(
-                      sigmaX: _blurAmount, sigmaY: _blurAmount),
-                  child: Container(
-                    color: Colors.black.withOpacity(0),
-                  ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+          child: Container(
+            margin: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color:Colors.indigo,
+              borderRadius: BorderRadius.circular(16.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
-          ),
-          // The DraggableScrollableSheet (drawer)
-          DraggableScrollableSheet(
-            initialChildSize:
-                0.55, // Start with the drawer showing 55% of the screen
-            minChildSize: 0.55, // Minimum drawer size
-            maxChildSize: 1, // Maximum drawer size when dragged upwards
-            builder: (BuildContext context, ScrollController scrollController) {
-              return NotificationListener<DraggableScrollableNotification>(
-                onNotification: (notification) {
-                  setState(() {
-                    _blurAmount = (notification.extent - 0.55) *
-                        10; // Control the blur amount dynamically
-                  });
-                  return true;
+            child: AppBar(
+              leading: IconButton(
+                color: Colors.white,
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
                 },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
+              elevation: 0,
+              title: const Text("Event Name",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+              toolbarHeight: 80.0, // Adjust as needed
+            ),
+          ),
+        ),
+        body: Stack(
+          children: <Widget>[
+            // The background image with blur effect
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.asset(
+                    'assets/images/backgrondimage.jpg', // Add your image here
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                  BackdropFilter(
+                    filter: ImageFilter.blur(
+                        sigmaX: _blurAmount, sigmaY: _blurAmount),
+                    child: Container(
+                      color: Colors.black.withOpacity(0),
                     ),
                   ),
-                  child: ListView(
-                    controller: scrollController,
-                    children: <Widget>[
-                      // Arrow icon at the top
-                      const Center(
-                        child: Icon(
-                          Icons.horizontal_rule_rounded, // Arrow icon
-                          size: 50.0,
-                          color: Colors.grey,
-                        ),
+                ],
+              ),
+            ),
+            // The DraggableScrollableSheet (drawer)
+            DraggableScrollableSheet(
+              initialChildSize:
+                  0.55, // Start with the drawer showing 55% of the screen
+              minChildSize: 0.55, // Minimum drawer size
+              maxChildSize: 1, // Maximum drawer size when dragged upwards
+              builder: (BuildContext context, ScrollController scrollController) {
+                return NotificationListener<DraggableScrollableNotification>(
+                  onNotification: (notification) {
+                    setState(() {
+                      _blurAmount = (notification.extent - 0.55) *
+                          10; // Control the blur amount dynamically
+                    });
+                    return true;
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            // Event Details using ListTile
-                            ListTile(
-                              leading: Icon(Icons.event),
-                              title: Text(
-                                "Name of Event",
+                    ),
+                    child: ListView(
+                      controller: scrollController,
+                      children: <Widget>[
+                        // Arrow icon at the top
+                        const Center(
+                          child: Icon(
+                            Icons.horizontal_rule_rounded, // Arrow icon
+                            size: 50.0,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              // Event Details using ListTile
+                              ListTile(
+                                leading: Icon(Icons.event),
+                                title: Text(
+                                  "Name of Event",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                subtitle: Text("Tech Symposium 2024"),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.calendar_today),
+                                title: Text(
+                                  "Event's Registration Date",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                subtitle: Text("01-06-2024 - 15-06-2024"),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.event_available),
+                                title: Text(
+                                  "Event's Date",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                subtitle: Text("20-06-2024"),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.access_time),
+                                title: Text(
+                                  "Time",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                subtitle: Text("09:00 AM"),
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.location_on),
+                                title: Text(
+                                  "Venue",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                                subtitle: Text("Conference Room"),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Description",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   color: Colors.indigo,
                                 ),
                               ),
-                              subtitle: Text("Tech Symposium 2024"),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.calendar_today),
-                              title: Text(
-                                "Event's Registration Date",
+                              Text(
+                                  "Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
+                            ],
+                          ),
+                        ),
+                        // Winners Section
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Winners",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.indigo,
-                                ),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.indigo),
                               ),
-                              subtitle: Text("01-06-2024 - 15-06-2024"),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.event_available),
-                              title: Text(
-                                "Event's Date",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.indigo,
+                              const SizedBox(height: 10),
+                              // Display the list of winners with position badges
+                              for (var winner in winners)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5.0),
+                                  child: ListTile(
+                                    leading: Icon(
+                                      winner['position'] == "Gold"
+                                          ? Icons.emoji_events
+                                          : winner['position'] == "Silver"
+                                              ? Icons.emoji_events_outlined
+                                              : Icons.military_tech,
+                                      color: winner['position'] == "Gold"
+                                          ? Colors.amber
+                                          : winner['position'] == "Silver"
+                                              ? Colors.grey
+                                              : Colors.brown,
+                                    ),
+                                    title: Text(
+                                      "${winner['name']} - ${winner['position']}",
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    trailing: IconButton(
+                                      icon: const Icon(
+                                          Icons.delete_outline_rounded),
+                                      onPressed: () {
+                                        _showRemoveWinnerDialog(winner);
+                                      },
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text("20-06-2024"),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.access_time),
-                              title: Text(
-                                "Time",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.indigo,
-                                ),
-                              ),
-                              subtitle: Text("09:00 AM"),
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.location_on),
-                              title: Text(
-                                "Venue",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.indigo,
-                                ),
-                              ),
-                              subtitle: Text("Conference Room"),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Description",
+                              SizedBox(height: 20),
+                            ],
+                          ),
+                        ),
+      
+                        // Participate Button
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Add your participate logic here
+                            },
+                            child: Text(
+                              'Participate',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.indigo,
+                                color: Colors
+                                    .white, // Set the desired text color here
                               ),
                             ),
-                            Text(
-                                "Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
-                          ],
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Colors.indigo, // Background color of the button
+                              shape: StadiumBorder(),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15), // Button padding
+                            ),
+                          ),
                         ),
-                      ),
-                      // Winners Section
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Winners",
+      
+                        // Add Winner Button for organizers
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: ElevatedButton(
+                            onPressed:
+                                _addWinnerDialog, // Call function to add a winner
+                            child: Text(
+                              'Add Winner',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.indigo),
-                            ),
-                            const SizedBox(height: 10),
-                            // Display the list of winners with position badges
-                            for (var winner in winners)
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: ListTile(
-                                  leading: Icon(
-                                    winner['position'] == "Gold"
-                                        ? Icons.emoji_events
-                                        : winner['position'] == "Silver"
-                                            ? Icons.emoji_events_outlined
-                                            : Icons.military_tech,
-                                    color: winner['position'] == "Gold"
-                                        ? Colors.amber
-                                        : winner['position'] == "Silver"
-                                            ? Colors.grey
-                                            : Colors.brown,
-                                  ),
-                                  title: Text(
-                                    "${winner['name']} - ${winner['position']}",
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                  trailing: IconButton(
-                                    icon: const Icon(
-                                        Icons.delete_outline_rounded),
-                                    onPressed: () {
-                                      _showRemoveWinnerDialog(winner);
-                                    },
-                                  ),
-                                ),
+                                color: Colors
+                                    .white, // Set the desired text color here
                               ),
-                            SizedBox(height: 20),
-                          ],
-                        ),
-                      ),
-
-                      // Participate Button
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Add your participate logic here
-                          },
-                          child: Text(
-                            'Participate',
-                            style: TextStyle(
-                              color: Colors
-                                  .white, // Set the desired text color here
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Colors.green, // Background color of the button
+                              shape: StadiumBorder(),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15), // Button padding
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Colors.indigo, // Background color of the button
-                            shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15), // Button padding
-                          ),
                         ),
-                      ),
-
-                      // Add Winner Button for organizers
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: ElevatedButton(
-                          onPressed:
-                              _addWinnerDialog, // Call function to add a winner
-                          child: Text(
-                            'Add Winner',
-                            style: TextStyle(
-                              color: Colors
-                                  .white, // Set the desired text color here
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Colors.green, // Background color of the button
-                            shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 15), // Button padding
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                        SizedBox(height: 20),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

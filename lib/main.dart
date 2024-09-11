@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Default icon color
     final Color defaultIconColor = Colors.grey;
     // Highlighted icon color
-    final Color highlightedIconColor = Theme.of(context).colorScheme.primary;
+    final Color highlightedIconColor = Colors.indigo;
 
     return Scaffold(
       body: Stack(

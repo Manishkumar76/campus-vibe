@@ -208,67 +208,69 @@ class _HomeScreenState extends State<HomeScreen> {
   final Color highlightedIconColor=Colors.indigo;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
-          child: Container(
-            margin: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color:highlightedIconColor,
-              borderRadius: BorderRadius.circular(16.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+    return SafeArea(
+      child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+            child: Container(
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color:highlightedIconColor,
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: AppBar(
+                backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
+                elevation: 0,
+                title: const Text("Campus Vibe",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+                actions: [
+                  IconButton(
+                    color: Colors.white,
+                    icon: const Icon(Icons.notifications),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => NotificationPage()),
+                      );
+                    },
+                  ),
+                ],
+                toolbarHeight: 80.0, // Adjust as needed
+              ),
             ),
-            child: AppBar(
-              backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
-              elevation: 0,
-              title: const Text("Campus Vibe",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
-              actions: [
-                IconButton(
-                  color: Colors.white,
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NotificationPage()),
-                    );
-                  },
-                ),
+          ),
+          body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8 ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _buildInitialBar(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                  const Text("Winners...",style: TextStyle(fontWeight:FontWeight.bold ,fontSize: 20),),
+                  TextButton(onPressed: (){
+                    Navigator.push(context,MaterialPageRoute(builder:(_)=>EventWinnersScreen()));
+                  }, child: const Text('See All',style: TextStyle(fontSize: 15),))
+                ],),
+                _buildWinnerGrid(),
+                _buildCategoryBar(),
+                _buildEventList(),
               ],
-              toolbarHeight: 80.0, // Adjust as needed
             ),
           ),
         ),
-        body: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8 ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _buildInitialBar(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                const Text("Winners...",style: TextStyle(fontWeight:FontWeight.bold ,fontSize: 20),),
-                TextButton(onPressed: (){
-                  Navigator.push(context,MaterialPageRoute(builder:(_)=>EventWinnersScreen()));
-                }, child: const Text('See All',style: TextStyle(fontSize: 15),))
-              ],),
-              _buildWinnerGrid(),
-              _buildCategoryBar(),
-              _buildEventList(),
-            ],
-          ),
-        ),
-      ),
-    ));
+      )),
+    );
   }
 
   Widget _buildCategoryBar() {
