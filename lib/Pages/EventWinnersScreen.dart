@@ -94,8 +94,9 @@ class EventWinnersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Event Winners"),
+        title: Text("Event Winners", style: TextStyle(color: Colors.white,fontSize: 25),),
         backgroundColor: Colors.blueAccent,
+
       ),
       body: ListView.builder(
         itemCount: events.length,

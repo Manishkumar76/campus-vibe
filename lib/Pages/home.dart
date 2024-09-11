@@ -2,6 +2,7 @@ import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:flutter/material.dart';
 import '../Models/event_model.dart';
 import 'notificationPage.dart';
+import 'package:campus_vibe/Pages/EventWinnersScreen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
