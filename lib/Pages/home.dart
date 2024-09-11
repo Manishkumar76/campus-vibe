@@ -2,6 +2,7 @@ import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:flutter/material.dart';
 import '../Models/event_model.dart';
 import 'notificationPage.dart';
+import 'package:campus_vibe/Pages/EventWinnersScreen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -256,7 +257,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 const Text("Winners...",style: TextStyle(fontWeight:FontWeight.bold ,fontSize: 20),),
-                TextButton(onPressed: (){}, child: const Text('See All',style: TextStyle(fontSize: 15),))
+                TextButton(onPressed: (){
+                  Navigator.push(context,MaterialPageRoute(builder:(_)=>EventWinnersScreen()));
+                }, child: const Text('See All',style: TextStyle(fontSize: 15),))
               ],),
               _buildWinnerGrid(),
               _buildCategoryBar(),
