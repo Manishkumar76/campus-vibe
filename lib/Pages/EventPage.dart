@@ -21,7 +21,8 @@ class _EventFormPageState extends State<EventFormPage> {
         centerTitle: true,
         title: const Text(
           'Event Name',
-          style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.indigo,
         leading: IconButton(
@@ -46,7 +47,8 @@ class _EventFormPageState extends State<EventFormPage> {
                   width: double.infinity,
                 ),
                 BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: _blurAmount, sigmaY: _blurAmount),
+                  filter: ImageFilter.blur(
+                      sigmaX: _blurAmount, sigmaY: _blurAmount),
                   child: Container(
                     color: Colors.black.withOpacity(0),
                   ),
@@ -56,14 +58,16 @@ class _EventFormPageState extends State<EventFormPage> {
           ),
           // The DraggableScrollableSheet (drawer)
           DraggableScrollableSheet(
-            initialChildSize: 0.55, // Start with the drawer showing 55% of the screen
+            initialChildSize:
+                0.55, // Start with the drawer showing 55% of the screen
             minChildSize: 0.55, // Minimum drawer size
             maxChildSize: 1, // Maximum drawer size when dragged upwards
             builder: (BuildContext context, ScrollController scrollController) {
               return NotificationListener<DraggableScrollableNotification>(
                 onNotification: (notification) {
                   setState(() {
-                    _blurAmount = (notification.extent - 0.55) * 10; // Control the blur amount dynamically
+                    _blurAmount = (notification.extent - 0.55) *
+                        10; // Control the blur amount dynamically
                   });
                   return true;
                 },
@@ -152,18 +156,19 @@ class _EventFormPageState extends State<EventFormPage> {
                               ),
                               subtitle: Text("Conference Room"),
                             ),
-                            SizedBox(height: 10,),
-                Text(
-                  "Description",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.indigo,
-                  ),
-                ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Description",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.indigo,
+                              ),
+                            ),
                             Text(
                                 "Tech Symposium 2024 is an exciting gathering of innovators, tech enthusiasts, and industry leaders from across the globe. This event will feature cutting-edge discussions on the latest trends in technology, including artificial intelligence, blockchain, quantum computing, and emerging software solutions. Attendees will have the opportunity to participate in workshops, network with professionals, and gain insights from keynote speeches by pioneers in the tech world."),
-
                           ],
                         ),
                       ),
@@ -176,33 +181,40 @@ class _EventFormPageState extends State<EventFormPage> {
                             const Text(
                               "Winners",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18, color: Colors.indigo),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.indigo),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             // Display the list of winners with position badges
                             for (var winner in winners)
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      winner['position'] == "Gold"
-                                          ? Icons.emoji_events
-                                          : winner['position'] == "Silver"
-                                          ? Icons.emoji_events_outlined
-                                          : Icons.military_tech,
-                                      color: winner['position'] == "Gold"
-                                          ? Colors.amber
-                                          : winner['position'] == "Silver"
-                                          ? Colors.grey
-                                          : Colors.brown,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      "${winner['name']} - ${winner['position']}",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: ListTile(
+                                  leading: Icon(
+                                    winner['position'] == "Gold"
+                                        ? Icons.emoji_events
+                                        : winner['position'] == "Silver"
+                                            ? Icons.emoji_events_outlined
+                                            : Icons.military_tech,
+                                    color: winner['position'] == "Gold"
+                                        ? Colors.amber
+                                        : winner['position'] == "Silver"
+                                            ? Colors.grey
+                                            : Colors.brown,
+                                  ),
+                                  title: Text(
+                                    "${winner['name']} - ${winner['position']}",
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  trailing: IconButton(
+                                    icon: const Icon(
+                                        Icons.delete_outline_rounded),
+                                    onPressed: () {
+                                      _showRemoveWinnerDialog(winner);
+                                    },
+                                  ),
                                 ),
                               ),
                             SizedBox(height: 20),
@@ -212,7 +224,8 @@ class _EventFormPageState extends State<EventFormPage> {
 
                       // Participate Button
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10),
                         child: ElevatedButton(
                           onPressed: () {
                             // Add your participate logic here
@@ -220,13 +233,16 @@ class _EventFormPageState extends State<EventFormPage> {
                           child: Text(
                             'Participate',
                             style: TextStyle(
-                              color: Colors.white, // Set the desired text color here
+                              color: Colors
+                                  .white, // Set the desired text color here
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.indigo, // Background color of the button
+                            backgroundColor:
+                                Colors.indigo, // Background color of the button
                             shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(vertical: 15), // Button padding
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15), // Button padding
                           ),
                         ),
                       ),
@@ -235,17 +251,21 @@ class _EventFormPageState extends State<EventFormPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: ElevatedButton(
-                          onPressed: _addWinnerDialog, // Call function to add a winner
+                          onPressed:
+                              _addWinnerDialog, // Call function to add a winner
                           child: Text(
                             'Add Winner',
                             style: TextStyle(
-                              color: Colors.white, // Set the desired text color here
+                              color: Colors
+                                  .white, // Set the desired text color here
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green, // Background color of the button
+                            backgroundColor:
+                                Colors.green, // Background color of the button
                             shape: StadiumBorder(),
-                            padding: EdgeInsets.symmetric(vertical: 15), // Button padding
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15), // Button padding
                           ),
                         ),
                       ),
@@ -258,6 +278,41 @@ class _EventFormPageState extends State<EventFormPage> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showRemoveWinnerDialog(winner) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Remove Winner"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                  "Do you want to remove ${winner['name']} from the winners list?"),
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            ElevatedButton(
+              child: const Text("Remove"),
+              onPressed: () {
+                setState(() {
+                  winners.remove(winner);
+                });
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -347,5 +402,4 @@ class _EventFormPageState extends State<EventFormPage> {
       },
     );
   }
-
 }
