@@ -70,7 +70,7 @@ class _EventFormPageState extends State<EventFormPage> {
                       // Arrow icon at the top
                       Center(
                         child: Icon(
-                          Icons.horizontal_rule, // Arrow icon
+                          Icons.horizontal_rule_rounded, // Arrow icon
                           size: 50.0,
                           color: Colors.grey,
                         ),
