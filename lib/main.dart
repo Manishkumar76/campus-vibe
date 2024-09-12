@@ -2,6 +2,7 @@ import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:campus_vibe/Pages/live.dart';
 import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
+import 'Pages/SplashScreen.dart';
 import 'Pages/addNewEvent.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 6, 33, 63)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Campus Vibe'),
+      home: SplashScreen(),
     );
   }
 }
