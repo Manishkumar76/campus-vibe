@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider:
-  flutter_typeahead: ^3.0.0
+
 
 
   # The following adds the Cupertino Icons font to your application.
