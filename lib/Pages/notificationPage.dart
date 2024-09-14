@@ -17,11 +17,45 @@ class NotificationPage extends StatelessWidget {
     },
   ];
 
+  final Color defaultIconColor = Colors.grey;
+  // Highlighted icon color
+  final Color highlightedIconColor=Colors.indigo;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications'),
+    return SafeArea(
+        child:Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+        child: Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color:highlightedIconColor,
+            borderRadius: BorderRadius.circular(16.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            leading: IconButton(
+              color: Colors.white,
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
+            elevation: 0,
+            title: const Text("Notification",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+            centerTitle: true,
+            toolbarHeight: 80.0, // Adjust as needed
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: notifications.length,
@@ -40,7 +74,7 @@ class NotificationPage extends StatelessWidget {
           );
         },
       ),
-    );
+    ));
   }
 }
 
