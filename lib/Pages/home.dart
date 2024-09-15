@@ -1,8 +1,10 @@
-import 'package:campus_vibe/Pages/EventListPage.dart';
+import 'package:campus_vibe/Pages/EventPage.dart';
 import 'package:flutter/material.dart';
+import '../Models/eventCategory_model.dart';
 import '../Models/event_model.dart';
 import 'notificationPage.dart';
 import 'package:campus_vibe/Pages/EventWinnersScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
@@ -13,8 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 1,
       mainImage: 'https://fastly.picsum.photos/id/60/1920/1200.jpg?hmac=fAMNjl4E_sG_WNUjdU39Kald5QAHQMh-_-TsIbbeDNI',
-      photo1: 'https://images.unsplash.com/photo-1563122871-a7f66e98d4d3',
-      photo2: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe',
       name: 'TechFest 2024',
       description:
       'An annual tech festival featuring coding competitions, hackathons, and workshops.',
@@ -32,8 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 2,
       mainImage: 'https://fastly.picsum.photos/id/342/2896/1944.jpg?hmac=_2cYDHi2iG1XY53gvXOrhrEWIP5R5OJlP7ySYYCA0QA',
-      photo1: 'https://images.unsplash.com/photo-1576186726115-4d6a16e918a2',
-      photo2: 'https://images.unsplash.com/photo-1580489944761-15a19d654956',
+
       name: 'Cultural Fest',
       description:
       'A celebration of music, dance, and drama showcasing the diverse cultures of students.',
@@ -51,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 3,
       mainImage: 'https://fastly.picsum.photos/id/428/2529/1581.jpg?hmac=FmX3-15B3BDpSiq3wq-eiTuAZ51CdKcJwrDeRICFCIU',
-      photo1: 'https://images.unsplash.com/photo-1608897013037-4e0274c19e8a',
-      photo2: 'https://images.unsplash.com/photo-1553531580-3506c60f1822',
+
       name: 'Annual Sports Meet',
       description:
       'A week-long event featuring various sports competitions including athletics, football, and basketball.',
@@ -70,8 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 4,
       mainImage: 'https://fastly.picsum.photos/id/341/5000/3337.jpg?hmac=au9Ex3OCaHWkfF3Ttoe4sXkQOsGPGeA1vrRwhmB2aug',
-      photo1: 'https://images.unsplash.com/photo-1542718619-4b31a1b1e3e3',
-      photo2: 'https://images.unsplash.com/photo-1567767292225-10e2dcf3ea10',
+
       name: 'Robotics Workshop',
       description:
       'A hands-on workshop focusing on building and programming robots for various tasks.',
@@ -89,8 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 5,
       mainImage: 'https://fastly.picsum.photos/id/178/2592/1936.jpg?hmac=lW1JtHlmevwr41pQSILng2JYKGlX7fLMmptsz45JKZ0',
-      photo1: 'https://images.unsplash.com/photo-1542145936-f758a8d9b79b',
-      photo2: 'https://images.unsplash.com/photo-1542145936-f758a8d9b79b',
+
       name: 'Innovation Day',
       description:
       'A showcase of innovative projects by students across various disciplines.',
@@ -108,8 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 6,
       mainImage: 'https://fastly.picsum.photos/id/159/5000/2460.jpg?hmac=h12oeFVhY4-vOrALaICJ4k4dqemWn1lvaMN8yvnIU1w',
-      photo1: 'https://images.unsplash.com/photo-1569693139405-7ce81e43484b',
-      photo2: 'https://images.unsplash.com/photo-1529612700005-f77199c78f62',
+
       name: 'Environmental Day',
       description:
       'A day dedicated to raising awareness about environmental issues through talks and activities.',
@@ -127,8 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 7,
       mainImage: 'https://fastly.picsum.photos/id/143/3600/2385.jpg?hmac=gSMmnYrmuP5BJ47kmErfYdYu1L1GLePM1SNm-D2lqiA',
-      photo1: 'https://images.unsplash.com/photo-1565373058210-3c87ecf312e5',
-      photo2: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
+
       name: 'Art Exhibition',
       description:
       'An exhibition showcasing artworks created by students, including paintings, sculptures, and digital art.',
@@ -146,8 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 8,
       mainImage: 'https://fastly.picsum.photos/id/160/3200/2119.jpg?hmac=cz68HnnDt3XttIwIFu5ymcvkCp-YbkEBAM-Zgq-4DHE',
-      photo1: 'https://images.unsplash.com/photo-1555685812-4b74332f563e',
-      photo2: 'https://images.unsplash.com/photo-1517059224940-d4af9eec41e4',
       name: 'Guest Lecture on AI',
       description:
       'A guest lecture by an industry expert on the latest trends and advancements in Artificial Intelligence.',
@@ -165,8 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 9,
       mainImage: 'https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8',
-      photo1: 'https://images.unsplash.com/photo-1542728918-8b5119af80e8',
-      photo2: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d',
       name: 'Hackathon 2024',
       description:
       'A 24-hour coding competition where teams develop innovative solutions to real-world problems.',
@@ -184,8 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Event(
       id: 10,
       mainImage: 'https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8',
-      photo1: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
-      photo2: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
       name: 'Entrepreneurship Summit',
       description:
       'A summit featuring talks and workshops by successful entrepreneurs, aimed at inspiring students to start their own ventures.',
@@ -200,6 +188,17 @@ class _HomeScreenState extends State<HomeScreen> {
       organizerId: 310,
       venueId: 410,
     ),
+  ];
+
+  List<Category> categories=[
+    Category(id: 1, name: "Technical", icon:Icons.computer_rounded ),
+    Category(id: 2, name: "Cultural", icon:Icons.palette_rounded ),
+    Category(id: 3, name: "Sports", icon:Icons.sports_soccer_rounded ),
+    Category(id: 4, name: "Robotics", icon:Icons.android_rounded ),
+    Category(id: 5, name: "Innovation", icon:Icons.lightbulb_rounded ),
+    Category(id: 6, name: "Environment", icon:Icons.eco_rounded ),
+    Category(id: 7, name: "Art", icon:Icons.palette_rounded ),
+    Category(id: 10, name: "Entrepreneurship", icon:Icons.business_center_rounded ),
   ];
 
 // Default icon color
@@ -303,24 +302,26 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              for (var i = 0; i < 6; i++)
+              for (var i = 0; i < categories.length; i++)
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Column(
                     children: [
                       Container(
-                        width: 70,
-                        height: 70,
+                        height: 60,
+                        width: 60,
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Icon(Icons.category),
+                        child: Icon(categories[i].icon),
                       ),
-                      const SizedBox(height: 5),
-                      const Text(
-                        'Category',
-                        style: TextStyle(fontSize: 10),
+                      const SizedBox(height: 4),
+                       Text(
+                        categories[i].name,
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -427,52 +428,65 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: events.length,
         itemBuilder: (BuildContext context, index) {
           final event = events[index];
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8.0),
-            elevation: 4.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EventFormPage(),
+                ),
+              );
+            },
+            child: Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     SizedBox(height: 200,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(event.mainImage,fit: BoxFit.fill,)),
-                    ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(16.0),
-                    title: Text(
-                      event.name,
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                        child: SizedBox(
+                          height: 250,
+                          width: double.infinity,
+                          child: Image.network( event.mainImage,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 8.0),
-                        Text('Venue: ${event.venueId}'),
-                        Text('Timing: ${event.eventStartTime}'),
-                        Text('Organizer: ${event.organizerId}'),
-                      ],
-                    ),
-                    isThreeLine: true,
-                    tileColor: Colors.grey[200],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventListPage(),
+                    ListTile(
+                      contentPadding: const EdgeInsets.all(16.0),
+                      title: Text(
+                        event.name,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
-                  ),
-                ],
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 8.0),
+                          Text('Venue: ${event.venueId}'),
+                          Text('Timing: ${event.eventStartTime}'),
+                          Text('Organizer: ${event.organizerId}'),
+                        ],
+                      ),
+                      isThreeLine: true,
+                      tileColor: Colors.grey[200],
+
+                    ),
+                  ],
+                ),
               ),
             ),
           );
