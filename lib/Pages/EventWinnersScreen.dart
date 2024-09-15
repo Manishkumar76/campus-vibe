@@ -117,6 +117,10 @@ class _EventWinnersScreenState extends State<EventWinnersScreen> {
     },
   ];
 
+  final Color defaultIconColor = Colors.grey;
+  // Highlighted icon color
+  final Color highlightedIconColor=Colors.indigo;
+
   // List of all categories
   final List<String> categories = ['All', 'Technical', 'Sports', 'Cultural'];
 
@@ -134,45 +138,65 @@ class _EventWinnersScreenState extends State<EventWinnersScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 10,
-          leading: IconButton(
-            color: Colors.white,
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: const Text("Event Winners", style:TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
-          backgroundColor: Colors.indigo,
-          actions: [
-            DropdownButton<String>(
-              value: selectedCategory,
-              dropdownColor: Colors.blueAccent,
-              icon: Icon(Icons.filter_list, color: Colors.white),
-              underline: Container(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedCategory = newValue!;
-                });
-              },
-              items: categories.map<DropdownMenuItem<String>>((String category) {
-                return DropdownMenuItem<String>(
-                  value: category,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      category,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+          child: Container(
+            margin: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color:highlightedIconColor,
+              borderRadius: BorderRadius.circular(16.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-          ],
+            child: AppBar(
+              leading: IconButton(
+                color: Colors.white,
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
+              elevation: 0,
+              title: const Text("Campus Vibe",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+              actions: [
+                DropdownButton<String>(
+                  value: selectedCategory,
+                  dropdownColor: Colors.indigo,
+                  icon: Icon(Icons.filter_list, color: Colors.white),
+                  underline: Container(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedCategory = newValue!;
+                    });
+                  },
+                  items: categories.map<DropdownMenuItem<String>>((String category) {
+                    return DropdownMenuItem<String>(
+                      value: category,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          category,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(width: 10),
+              ],
+              toolbarHeight: 80.0, // Adjust as needed
+            ),
+          ),
         ),
         body: filteredEvents.isEmpty
             ? Center(
