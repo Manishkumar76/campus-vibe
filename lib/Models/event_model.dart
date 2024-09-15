@@ -2,8 +2,7 @@ class Event {
 
   final int id;
   final String mainImage;
-  final String photo1;
-  final String photo2;
+
   final String name;
   final String description;
   final DateTime eventRegisterStartDate;
@@ -20,8 +19,6 @@ class Event {
   Event({
     required this.id,
     required this.mainImage,
-    required this.photo1,
-    required this.photo2,
     required this.name,
     required this.description,
     required this.eventRegisterStartDate,
@@ -40,8 +37,6 @@ class Event {
     return Event(
       id: json['id'],
       mainImage: json['main_image'],
-      photo1: json['photo_1'],
-      photo2: json['photo_2'],
       name: json['name'],
       description: json['description'],
       eventRegisterStartDate: DateTime.parse(json['event_register_start_date']),
@@ -63,8 +58,7 @@ class Event {
     return {
       'id': id,
       'main_image': mainImage,
-      'photo_1': photo1,
-      'photo_2': photo2,
+
       'name': name,
       'description': description,
       'event_register_start_date': eventRegisterStartDate.toIso8601String(),

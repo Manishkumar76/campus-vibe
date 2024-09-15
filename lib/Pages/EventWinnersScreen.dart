@@ -164,7 +164,7 @@ class _EventWinnersScreenState extends State<EventWinnersScreen> {
               ),
               backgroundColor: Colors.transparent, // Use transparent to allow the Container's color to show
               elevation: 0,
-              title: const Text("Campus Vibe",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+              title: const Text("Winners",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
               actions: [
                 DropdownButton<String>(
                   value: selectedCategory,
