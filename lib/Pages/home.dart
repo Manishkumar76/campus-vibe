@@ -12,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Event> events = [
     Event(
       id: 1,
-      mainImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0',
+      mainImage: 'https://fastly.picsum.photos/id/60/1920/1200.jpg?hmac=fAMNjl4E_sG_WNUjdU39Kald5QAHQMh-_-TsIbbeDNI',
       photo1: 'https://images.unsplash.com/photo-1563122871-a7f66e98d4d3',
       photo2: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe',
       name: 'TechFest 2024',
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 2,
-      mainImage: 'https://images.unsplash.com/photo-1576186726115-4d6a16e918a2',
+      mainImage: 'https://fastly.picsum.photos/id/342/2896/1944.jpg?hmac=_2cYDHi2iG1XY53gvXOrhrEWIP5R5OJlP7ySYYCA0QA',
       photo1: 'https://images.unsplash.com/photo-1576186726115-4d6a16e918a2',
       photo2: 'https://images.unsplash.com/photo-1580489944761-15a19d654956',
       name: 'Cultural Fest',
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 3,
-      mainImage: 'https://images.unsplash.com/photo-1571631649249-74bcb80826d7',
+      mainImage: 'https://fastly.picsum.photos/id/428/2529/1581.jpg?hmac=FmX3-15B3BDpSiq3wq-eiTuAZ51CdKcJwrDeRICFCIU',
       photo1: 'https://images.unsplash.com/photo-1608897013037-4e0274c19e8a',
       photo2: 'https://images.unsplash.com/photo-1553531580-3506c60f1822',
       name: 'Annual Sports Meet',
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 4,
-      mainImage: 'https://images.unsplash.com/photo-1542718619-4b31a1b1e3e3',
+      mainImage: 'https://fastly.picsum.photos/id/341/5000/3337.jpg?hmac=au9Ex3OCaHWkfF3Ttoe4sXkQOsGPGeA1vrRwhmB2aug',
       photo1: 'https://images.unsplash.com/photo-1542718619-4b31a1b1e3e3',
       photo2: 'https://images.unsplash.com/photo-1567767292225-10e2dcf3ea10',
       name: 'Robotics Workshop',
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 5,
-      mainImage: 'https://images.unsplash.com/photo-1581090700227-5e07a4b7a2b2',
+      mainImage: 'https://fastly.picsum.photos/id/178/2592/1936.jpg?hmac=lW1JtHlmevwr41pQSILng2JYKGlX7fLMmptsz45JKZ0',
       photo1: 'https://images.unsplash.com/photo-1542145936-f758a8d9b79b',
       photo2: 'https://images.unsplash.com/photo-1542145936-f758a8d9b79b',
       name: 'Innovation Day',
@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 6,
-      mainImage: 'https://images.unsplash.com/photo-1569693139405-7ce81e43484b',
+      mainImage: 'https://fastly.picsum.photos/id/159/5000/2460.jpg?hmac=h12oeFVhY4-vOrALaICJ4k4dqemWn1lvaMN8yvnIU1w',
       photo1: 'https://images.unsplash.com/photo-1569693139405-7ce81e43484b',
       photo2: 'https://images.unsplash.com/photo-1529612700005-f77199c78f62',
       name: 'Environmental Day',
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 7,
-      mainImage: 'https://images.unsplash.com/photo-1565373058210-3c87ecf312e5',
+      mainImage: 'https://fastly.picsum.photos/id/143/3600/2385.jpg?hmac=gSMmnYrmuP5BJ47kmErfYdYu1L1GLePM1SNm-D2lqiA',
       photo1: 'https://images.unsplash.com/photo-1565373058210-3c87ecf312e5',
       photo2: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470',
       name: 'Art Exhibition',
@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 8,
-      mainImage: 'https://images.unsplash.com/photo-1518460279809-42e5a4a7f8aa',
+      mainImage: 'https://fastly.picsum.photos/id/160/3200/2119.jpg?hmac=cz68HnnDt3XttIwIFu5ymcvkCp-YbkEBAM-Zgq-4DHE',
       photo1: 'https://images.unsplash.com/photo-1555685812-4b74332f563e',
       photo2: 'https://images.unsplash.com/photo-1517059224940-d4af9eec41e4',
       name: 'Guest Lecture on AI',
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 9,
-      mainImage: 'https://images.unsplash.com/photo-1556485688-52f9f6832f27',
+      mainImage: 'https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8',
       photo1: 'https://images.unsplash.com/photo-1542728918-8b5119af80e8',
       photo2: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d',
       name: 'Hackathon 2024',
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Event(
       id: 10,
-      mainImage: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
+      mainImage: 'https://fastly.picsum.photos/id/163/2000/1333.jpg?hmac=htdHeSJwlYOxS8b0TTpz2s8tD_QDlmsd3JHYa_HGrg8',
       photo1: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
       photo2: 'https://images.unsplash.com/photo-1494173853739-c21f58b16055',
       name: 'Entrepreneurship Summit',
