@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../../constant/utils.dart';
 import '../../main.dart';
 import '../SingnUp/SignUpScreen.dart';
 import 'forgot_password.dart';
+
 
 // Define your LoginModel here
 class LoginModel {
@@ -68,58 +70,58 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  // void login() async {
-  //   if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-  //     setWarning("Every field must be filled!");
-  //   } else {
-  //     setWarning(""); // Clear warning message
-  //     setState(() {
-  //       isLoading = true; // Show loading indicator
-  //     });
-  //
-  //     try {
-  //       // Create the LoginModel instance with user inputs
-  //       LoginModel loginModel = LoginModel(
-  //         email: emailController.text,
-  //         password: passwordController.text,
-  //         role: 'farmer',
-  //         deviceToken: 'exampleDeviceToken',
-  //         type: 'email',
-  //         socialId: '',
-  //       );
-  //
-  //       // Send the login request
-  //       final response = await http.post(
-  //         // Uri.parse(Utills().loginUrl),
-  //         headers: {'Content-Type': 'application/json'},
-  //         body: jsonEncode(loginModel.toJson()),
-  //       );
-  //
-  //       // Handle the response
-  //       if (response.statusCode == 200) {
-  //         final responseData = jsonDecode(response.body);
-  //         if (responseData['success'] == 'true') {
-  //           Navigator.pushReplacement(
-  //             context,
-  //             MaterialPageRoute(builder: (_) => const MyHomePage(title: "Farmer Eats")),
-  //           );
-  //         } else {
-  //           // Handle specific errors based on response message
-  //           _showErrorMessage(responseData['message']);
-  //         }
-  //       } else {
-  //         // Handle server error
-  //         _showErrorMessage('Server error while logging in.');
-  //       }
-  //     } catch (error) {
-  //       _showErrorMessage('An unexpected error occurred.');
-  //     } finally {
-  //       setState(() {
-  //         isLoading = false; // Hide loading indicator
-  //       });
-  //     }
-  //   }
-  // }
+  void login() async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      setWarning("Every field must be filled!");
+    } else {
+      setWarning(""); // Clear warning message
+      setState(() {
+        isLoading = true; // Show loading indicator
+      });
+
+      try {
+        // Create the LoginModel instance with user inputs
+        LoginModel loginModel = LoginModel(
+          email: emailController.text,
+          password: passwordController.text,
+          role: 'farmer',
+          deviceToken: 'exampleDeviceToken',
+          type: 'email',
+          socialId: '',
+        );
+
+        // Send the login request
+        final response = await http.post(
+          Uri.parse('${Utils.baseUrl}/login'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode(loginModel.toJson()),
+        );
+
+        // Handle the response
+        if (response.statusCode == 200) {
+          final responseData = jsonDecode(response.body);
+          if (responseData['success'] == 'true') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const MyHomePage(title: "Farmer Eats")),
+            );
+          } else {
+            // Handle specific errors based on response message
+            _showErrorMessage(responseData['message']);
+          }
+        } else {
+          // Handle server error
+          _showErrorMessage('Server error while logging in.');
+        }
+      } catch (error) {
+        _showErrorMessage('An unexpected error occurred.');
+      } finally {
+        setState(() {
+          isLoading = false; // Hide loading indicator
+        });
+      }
+    }
+  }
 
   void _showErrorMessage(String message) {
     showDialog(
@@ -159,168 +161,169 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Welcome back!',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Welcome back!',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  const Text(
-                    'New here?',
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const Text(
+                      'New here?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'Create account',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.indigo,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.email_outlined),
+                    hintText: 'Email Address',
+                    filled: true,
+                    fillColor: const Color(0xFFEAE8E4),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    hintText: 'Password',
+                    filled: true,
+                    fillColor: const Color(0xFFEAE8E4),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                    suffixIcon: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const ForgotPassword()),
+                        );
+                      },
+                      child: const Text('Forgot?'),
+                    ),
+                    suffixStyle: const TextStyle(
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: warning.isEmpty
+                      ? null
+                      : Text(
+                          warning,
+                          style: const TextStyle(fontSize: 12, color: Colors.red),
+                        ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const MyHomePage(title: "Campus Vibe")));
+                    }, // Disable button while loading
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: isLoading
+                        ? const CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        : const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Center(
+                  child: Text(
+                    'or login with',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignUpScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Create account',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFFDD6C48),
-                        fontWeight: FontWeight.bold,
-                      ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SocialLoginButton(icon: Icons.g_mobiledata, color: Colors.orange, onPressed: (){}),
+                    SocialLoginButton(
+      
+                      icon: Icons.apple,
+                      color: Colors.black, // Apple color
+                      onPressed: () {
+                        // Handle Apple login
+                      },
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  hintText: 'Email Address',
-                  filled: true,
-                  fillColor: const Color(0xFFEAE8E4),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock_outline),
-                  hintText: 'Password',
-                  filled: true,
-                  fillColor: const Color(0xFFEAE8E4),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const ForgotPassword()),
-                      );
-                    },
-                    child: const Text('Forgot?'),
-                  ),
-                  suffixStyle: const TextStyle(
-                    color: Color(0xFFDD6C48),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              Center(
-                child: warning.isEmpty
-                    ? null
-                    : Text(
-                  warning,
-                  style: const TextStyle(fontSize: 12, color: Colors.red),
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed:  (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const MyHomePage(title: "Campus Vibe")));
-                  }, // Disable button while loading
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFDD6C48),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                    SocialLoginButton(
+                      icon: Icons.facebook,
+                      color: Colors.blueAccent, // Facebook color
+                      onPressed: () {
+                        // Handle Facebook login
+                      },
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: isLoading
-                      ? const CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>( Colors.white),
-                  )
-                      : const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 20),
-              const Center(
-                child: Text(
-                  'or login with',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                 SocialLoginButton(
-                   icon:Icons.g_mobiledata,
-                   color: Colors.red,
-                   onPressed: (){
-
-                   },
-                 ),
-                  SocialLoginButton(
-                    icon: Icons.apple,
-                    color: Colors.black, // Apple color
-                    onPressed: () {
-                      // Handle Apple login
-                    },
-                  ),
-                  SocialLoginButton(
-                    icon: Icons.facebook,
-                    color: Colors.blue, // Facebook color
-                    onPressed: () {
-                      // Handle Facebook login
-                    },
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

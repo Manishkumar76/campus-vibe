@@ -1,3 +1,4 @@
+import 'package:campus_vibe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
@@ -18,7 +19,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     setWarning("");
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf'],
+      allowedExtensions: ['jpeg, jpg, png'],
     );
 
     if (result != null) {
@@ -38,12 +39,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void submission(){
-    if(selectedFile==null){
-      setWarning("Any proof be required!");
-    }
-    else{
-
-    }
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const MyHomePage(title: "Campus Vibe")));
   }
 
 
@@ -62,17 +58,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
             const SizedBox(height: 10),
             const Text(
-              "Signup 3 of 4",
+              "Signup 3 of 3",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.grey),
             ),
             const SizedBox(height: 10),
             const Text(
-              "Verification",
+              "Upload Profile Picture",
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: Colors.black),
             ),
             const SizedBox(height: 10),
             const Text(
-              "Attach proof of Department of Agriculture registrations i.e. Florida Fresh, USDA Approved, USDA Organic",
+              "Please upload a profile picture to complete your registration",
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
             const SizedBox(height: 20),
@@ -88,13 +84,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   onTap: _pickFile,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.orange.withOpacity(0.2),
+                      color: Colors.indigo.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(50),
                     ),
                     padding: const EdgeInsets.all(15),
                     child: const Icon(
                       Icons.camera_alt_outlined,
-                      color: Colors.orange,
+                      color: Colors.indigo,
                     ),
                   ),
                 ),
@@ -139,7 +135,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       submission();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFDD6C48),
+                      backgroundColor: Colors.indigo,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),

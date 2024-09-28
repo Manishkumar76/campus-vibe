@@ -4,20 +4,19 @@ import 'package:provider/provider.dart';
 
 import '../../Models/user_model.dart';
 
-class BusinessDetailsScreen extends StatefulWidget {
-  const BusinessDetailsScreen({super.key});
+class UserDetailsScreen extends StatefulWidget {
+  const UserDetailsScreen({super.key});
 
   @override
-  State<BusinessDetailsScreen> createState() => _BusinessDetailsScreenState();
+  State<UserDetailsScreen> createState() => _UserDetailsScreenState();
 }
 
-class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
+class _UserDetailsScreenState extends State<UserDetailsScreen> {
   TextEditingController businessContoller = TextEditingController();
   TextEditingController InformalContoller = TextEditingController();
   TextEditingController adressContoller = TextEditingController();
   TextEditingController cityContoller = TextEditingController();
   TextEditingController StateContoller = TextEditingController();
-  TextEditingController ZipcodeContoller = TextEditingController();
 
   var warning = "";
   void setWarning(String message) {
@@ -31,8 +30,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
         InformalContoller.text.isEmpty ||
         adressContoller.text.isEmpty ||
         cityContoller.text.isEmpty ||
-        StateContoller.text.isEmpty ||
-        ZipcodeContoller.text.isEmpty) {
+        StateContoller.text.isEmpty ) {
       setWarning("Every Fields are Required!");
     } else {
       Navigator.push(context,
@@ -47,20 +45,18 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               const SizedBox(
-                height: 50,
+                height: 100,
               ),
-              const Text('Signup 2 of 4',
+              const Text('Signup 2 of 3',
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey)),
               const SizedBox(height: 4),
-              const Text('Farm Info',
+              const Text('Basic Details',
                   style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
@@ -76,8 +72,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.business),
-                  hintText: 'Business Name',
+                  prefixIcon: const Icon(Icons.sticky_note_2_outlined),
+                  hintText: 'Roll Number',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
                   border: OutlineInputBorder(
@@ -97,8 +93,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.store_mall_directory),
-                  hintText: 'Informal Name',
+                  prefixIcon:const Icon(Icons.book),
+                  hintText: 'Department',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
                   border: OutlineInputBorder(
@@ -117,8 +113,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.location_on),
-                  hintText: 'Address',
+                  prefixIcon: const Icon(Icons.batch_prediction),
+                  hintText: 'Batch Year',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
                   border: OutlineInputBorder(
@@ -138,8 +134,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.location_city),
-                  hintText: 'City',
+                  prefixIcon: const Icon(Icons.people_alt_outlined),
+                  hintText: 'Gender',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
                   border: OutlineInputBorder(
@@ -159,29 +155,8 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.map),
-                  hintText: 'State',
-                  filled: true,
-                  fillColor: const Color(0xFFEAE8E4),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: ZipcodeContoller,
-                onChanged: (value) {
-                  setState(() {
-                    ZipcodeContoller = value as TextEditingController;
-                  });
-                  setWarning("");
-                },
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.local_post_office),
-                  hintText: 'Zip Code',
+                  prefixIcon: const Icon(Icons.account_circle_outlined),
+                  hintText: 'Age',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
                   border: OutlineInputBorder(
@@ -199,7 +174,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                         style: const TextStyle(fontSize: 12, color: Colors.red),
                       ),
               ),
-              const Spacer(),
+            const SizedBox( height: 40,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -215,7 +190,7 @@ class _BusinessDetailsScreenState extends State<BusinessDetailsScreen> {
                         continueToNext();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFDD6C48),
+                        backgroundColor: Colors.indigo,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                         padding: const EdgeInsets.symmetric(vertical: 16),

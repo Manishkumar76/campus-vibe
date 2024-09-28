@@ -141,6 +141,19 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -175,7 +188,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                       'Login',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Color(0xFFDD6C48), // Orange color for the text
+                        color: Colors.indigo, // Orange color for the text
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -211,7 +224,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 child: ElevatedButton(
                   onPressed: (){},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFDD6C48), // Button color
+                    backgroundColor: Colors.indigo, // Button color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -235,7 +248,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   child: const Text(
                     "Resend Code",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey,
                       textBaseline: TextBaseline.ideographic,
                     ),
                   ),

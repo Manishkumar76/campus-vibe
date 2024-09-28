@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:campus_vibe/Authentication/Login/verifyOTPScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -136,7 +137,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       'Login',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Color(0xFFDD6C48),
+                        color: Colors.indigo,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -164,9 +165,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>const VerifyOTPScreen()));
+                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFDD6C48),
+                    backgroundColor: Colors.indigo,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
