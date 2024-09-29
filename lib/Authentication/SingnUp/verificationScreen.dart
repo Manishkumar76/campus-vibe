@@ -39,7 +39,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void submission(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const MyHomePage(title: "Campus Vibe")));
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (_) =>
+            const MyHomePage(title: "Campus Vibe")));
   }
 
 

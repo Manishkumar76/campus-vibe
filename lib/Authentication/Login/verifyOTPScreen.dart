@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:campus_vibe/Authentication/Login/reset_passwordScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:http/http.dart' as http;
+import '../../constant/utils.dart';
 
 class VerifyOtpModel {
   final String otp;
@@ -65,47 +70,47 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  // void verifyOtp() async {
-  //   if (_otpcode.length == _otpLength) {
-  //     var verifyOtpModel = VerifyOtpModel(otp: _otpcode);
-  //     try {
-  //       final response = await http.post(
-  //           Uri.parse(Utills().verifyOtpUrl),
-  //           headers: {'Content-Type': 'application/json'},
-  //           body: jsonEncode(verifyOtpModel.toJson())
-  //
-  //       );
-  //
-  //       if (response.statusCode == 200) {
-  //         var responseData = jsonDecode(response.body);
-  //         if (responseData['success'] == "true") {
-  //           Navigator.push(
-  //             context,
-  //             MaterialPageRoute(builder: (_) => const ResetPasswordScreen()),
-  //           );
-  //         }
-  //         else if(responseData['message']=="Unable to verify OTP, please try again."){
-  //           _showErrorSnackbar(context, "Unable to verify OTP, please try again.");
-  //         }
-  //         else if( responseData['message']=="Invalid OTP."){
-  //           _showErrorSnackbar(context, "Invalid OTP.");
-  //         }
-  //         else if( responseData['message']=="OTP cannot be empty."){
-  //           _showErrorSnackbar(context, "OTP cannot be empty.");
-  //         }
-  //         else{
-  //           _showErrorSnackbar(context, "An error occurred. Please try again.");
-  //         }
-  //       }
-  //     } catch (e) {
-  //       print(e);
-  //       _showErrorSnackbar(context, "An error occurred. Please try again.");
-  //     }
-  //   } else {
-  //     // Show error Snackbar if OTP is invalid
-  //     _showErrorSnackbar(context, "Invalid OTP. Please try again.");
-  //   }
-  // }
+  void verifyOtp() async {
+    if (_otpcode.length == _otpLength) {
+      var verifyOtpModel = VerifyOtpModel(otp: _otpcode);
+      try {
+        final response = await http.post(
+            Uri.parse('${Utils.baseUrl}verify-otp'),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode(verifyOtpModel.toJson())
+
+        );
+
+        if (response.statusCode == 200) {
+          var responseData = jsonDecode(response.body);
+          if (responseData['success'] == "true") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ResetPasswordScreen()),
+            );
+          }
+          else if(responseData['message']=="Unable to verify OTP, please try again."){
+            _showErrorSnackbar(context, "Unable to verify OTP, please try again.");
+          }
+          else if( responseData['message']=="Invalid OTP."){
+            _showErrorSnackbar(context, "Invalid OTP.");
+          }
+          else if( responseData['message']=="OTP cannot be empty."){
+            _showErrorSnackbar(context, "OTP cannot be empty.");
+          }
+          else{
+            _showErrorSnackbar(context, "An error occurred. Please try again.");
+          }
+        }
+      } catch (e) {
+        print(e);
+        _showErrorSnackbar(context, "An error occurred. Please try again.");
+      }
+    } else {
+      // Show error Snackbar if OTP is invalid
+      _showErrorSnackbar(context, "Invalid OTP. Please try again.");
+    }
+  }
 
 
 

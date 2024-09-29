@@ -33,7 +33,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         StateContoller.text.isEmpty ) {
       setWarning("Every Fields are Required!");
     } else {
-      Navigator.push(context,
+      Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (_) => const VerificationScreen()));
     }
   }
