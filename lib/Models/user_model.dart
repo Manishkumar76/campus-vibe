@@ -1,4 +1,8 @@
-class User {
+
+
+import 'package:flutter/material.dart';
+
+class User with ChangeNotifier {
   int id;
   String profileImage;
   String name;
@@ -15,40 +19,21 @@ class User {
   int batchId;
 
   User({
-    required this.id,
-    required this.profileImage,
-    required this.name,
-    required this.email,
-    required this.verifyEmail,
-    required this.token,
-    required this.password,
-    required this.rollNo,
-    required this.userType,
-    required this.gender,
-    required this.departmentId,
-    required this.phone,
-    required this.age,
-    required this.batchId,
+     this.id=0,
+     this.profileImage='',
+     this.name ="",
+    this.email= '',
+     this.verifyEmail=  '',
+     this.token='',
+    this.password='',
+     this.rollNo='',
+     this.userType='',
+     this.gender='',
+     this.departmentId=0,
+     this.phone='',
+     this.age=0,
+     this.batchId=0,
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'profile_image': profileImage,
-      'name': name,
-      'email': email,
-      'verify_email': verifyEmail,
-      'token': token,
-      'password': password,
-      'roll_no': rollNo,
-      'user_type': userType,
-      'gender': gender,
-      'department_id': departmentId,
-      'phone': phone,
-      'age': age,
-      'batch_id': batchId,
-    };
-  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -67,6 +52,25 @@ class User {
       verifyEmail: '',
       token: '', // Assign default value if null
     );
+  }
+
+  Map<String, dynamic> toJson(){
+    return {
+      'id': id,
+      'profile_image': profileImage,
+      'name': name,
+      'email': email,
+      'verify_email': verifyEmail,
+      'token': token,
+      'password': password,
+      'roll_no': rollNo,
+      'user_type': userType,
+      'gender':gender,
+      'department_id': departmentId,
+      'phone': phone,
+      'age': age,
+      'batch_id': batchId,
+    };
   }
 
 }

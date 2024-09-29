@@ -2,13 +2,19 @@ import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:campus_vibe/Pages/live.dart';
 import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'Models/user_model.dart';
 import 'Pages/SplashScreen.dart';
 import 'Pages/addNewEvent.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
 
 void main() {
-  runApp(const MyApp());
+
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => User(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:campus_vibe/Authentication/Login/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:campus_vibe/main.dart';
@@ -35,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const MyHomePage( title: 'Campus Vibe')));
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const LoginScreen()));
     });
   }
 

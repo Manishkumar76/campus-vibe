@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '09:00 AM',
       totalParticipant: 500,
       departmentId: 101,
-      categoryId: 201,
+      categoryId: 1,
       organizerId: 301,
       venueId: 401,
     ),
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '10:00 AM',
       totalParticipant: 300,
       departmentId: 102,
-      categoryId: 202,
+      categoryId: 2,
       organizerId: 302,
       venueId: 402,
     ),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '08:00 AM',
       totalParticipant: 400,
       departmentId: 103,
-      categoryId: 203,
+      categoryId: 3,
       organizerId: 303,
       venueId: 403,
     ),
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '11:00 AM',
       totalParticipant: 100,
       departmentId: 104,
-      categoryId: 204,
+      categoryId: 4,
       organizerId: 304,
       venueId: 404,
     ),
@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '09:30 AM',
       totalParticipant: 200,
       departmentId: 105,
-      categoryId: 205,
+      categoryId: 5,
       organizerId: 305,
       venueId: 405,
     ),
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '10:30 AM',
       totalParticipant: 150,
       departmentId: 106,
-      categoryId: 206,
+      categoryId: 6,
       organizerId: 306,
       venueId: 406,
     ),
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '11:00 AM',
       totalParticipant: 100,
       departmentId: 107,
-      categoryId: 207,
+      categoryId: 7,
       organizerId: 307,
       venueId: 407,
     ),
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '12:00 PM',
       totalParticipant: 250,
       departmentId: 108,
-      categoryId: 208,
+      categoryId: 4,
       organizerId: 308,
       venueId: 408,
     ),
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '02:00 PM',
       totalParticipant: 150,
       departmentId: 109,
-      categoryId: 209,
+      categoryId: 1,
       organizerId: 309,
       venueId: 409,
     ),
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
       eventStartTime: '09:00 AM',
       totalParticipant: 200,
       departmentId: 110,
-      categoryId: 210,
+      categoryId: 5,
       organizerId: 310,
       venueId: 410,
     ),
@@ -205,8 +205,18 @@ class _HomeScreenState extends State<HomeScreen> {
   final Color defaultIconColor = Colors.grey;
   // Highlighted icon color
   final Color highlightedIconColor=Colors.indigo;
+
+  String selectedCategory ="All";
+
+  int _getCategoryId(String categoryName) {
+    return categories.firstWhere((category) => category.name == categoryName).id;
+  }
   @override
   Widget build(BuildContext context) {
+    List<Event> filteredEvents = (selectedCategory == 'All'
+        ? events
+        : events.where((event) => event.categoryId == _getCategoryId(selectedCategory)).toList());
+
     return SafeArea(
       child: Scaffold(
           appBar: PreferredSize(
@@ -263,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],),
                 _buildWinnerGrid(),
                 _buildCategoryBar(),
-                _buildEventList(),
+                _buildEventList(filteredEvents),
               ],
             ),
           ),
@@ -286,7 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  selectedCategory='All';
+                });
+
+              },
               child: const Text(
                 'See All',
                 style: TextStyle(
@@ -303,27 +318,34 @@ class _HomeScreenState extends State<HomeScreen> {
             scrollDirection: Axis.horizontal,
             children: [
               for (var i = 0; i < categories.length; i++)
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = categories[i].name;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: selectedCategory==categories[i].name?Colors.indigo.shade400: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(categories[i].icon,color: selectedCategory==categories[i].name?Colors.white:Colors.black),
                         ),
-                        child: Icon(categories[i].icon),
-                      ),
-                      const SizedBox(height: 4),
-                       Text(
-                        categories[i].name,
-                        style: const TextStyle(
-                          fontSize: 12,
+                        const SizedBox(height: 4),
+                         Text(
+                          categories[i].name,
+                          style: const TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
             ],
@@ -374,7 +396,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildWinnerGrid() {
     return SizedBox(
-      height: 400.0, // Set a fixed height for the grid
+      height: 300.0, // Set a fixed height for the grid
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(), // Grid won't scroll
@@ -417,7 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildEventList() {
+  Widget _buildEventList( List<Event> Events) {
     return SizedBox(
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
@@ -425,9 +447,9 @@ class _HomeScreenState extends State<HomeScreen> {
         itemExtent: 400,
         primary: false,
         padding: const EdgeInsets.all(8.0),
-        itemCount: events.length,
+        itemCount: Events.length,
         itemBuilder: (BuildContext context, index) {
-          final event = events[index];
+          final event = Events[index];
           return GestureDetector(
             onTap: () {
               Navigator.push(
