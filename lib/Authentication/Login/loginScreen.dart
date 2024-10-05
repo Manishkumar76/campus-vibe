@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:campus_vibe/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Pages/SplashScreen.dart';
 import '../../constant/utils.dart';
 import '../../main.dart';
 import '../SingnUp/SignUpScreen.dart';
@@ -11,19 +14,11 @@ import 'forgot_password.dart';
 class LoginModel {
   final String email;
   final String password;
-  final String role;
-  final String deviceToken;
-  final String type;
-  final String socialId;
 
   // Constructor to initialize all fields
   LoginModel({
     required this.email,
     required this.password,
-    required this.role,
-    required this.deviceToken,
-    required this.type,
-    required this.socialId,
   });
 
   // Factory method to create a new instance from a JSON object
@@ -31,10 +26,6 @@ class LoginModel {
     return LoginModel(
       email: json['email'],
       password: json['password'],
-      role: json['role'],
-      deviceToken: json['device_token'],
-      type: json['type'],
-      socialId: json['social_id'],
     );
   }
 
@@ -43,10 +34,6 @@ class LoginModel {
     return {
       'email': email,
       'password': password,
-      'role': role,
-      'device_token': deviceToken,
-      'type': type,
-      'social_id': socialId,
     };
   }
 }
@@ -84,32 +71,33 @@ class _LoginScreenState extends State<LoginScreen> {
         LoginModel loginModel = LoginModel(
           email: emailController.text,
           password: passwordController.text,
-          role: 'farmer',
-          deviceToken: 'exampleDeviceToken',
-          type: 'email',
-          socialId: '',
         );
 
         // Send the login request
         final response = await http.post(
-          Uri.parse('${Utils.baseUrl}/login'),
+          Uri.parse('${Utils.baseUrl}user/login'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(loginModel.toJson()),
         );
-
+           print('${Utils.baseUrl}user/login');
         // Handle the response
         if (response.statusCode == 200) {
           final responseData = jsonDecode(response.body);
-          if (responseData['success'] == 'true') {
+          SharedPreferences sp= await SharedPreferences.getInstance();
+          setState(() {
+            sp.setBool(SplashScreenState.loginKey, true);
+            sp.setInt("userId", responseData['id']);
+          });
+           await UserServices().getUserById(sp.getInt("userId")!);
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (_) => const MyHomePage(title: "Farmer Eats")),
+              MaterialPageRoute(builder: (_) => const MyHomePage(title: "Campus Vibe")),
             );
-          } else {
-            // Handle specific errors based on response message
-            _showErrorMessage(responseData['message']);
-          }
-        } else {
+        }
+        else if(response.statusCode==404){
+          _showErrorMessage("Account doesn't exist!");
+        }
+        else {
           // Handle server error
           _showErrorMessage('Server error while logging in.');
         }
@@ -263,11 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) =>
-                                  const MyHomePage(title: "Campus Vibe")));
+                      login();
                     }, // Disable button while loading
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo,

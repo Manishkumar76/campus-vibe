@@ -1,16 +1,69 @@
+import 'package:campus_vibe/Authentication/Login/loginScreen.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../Models/user_model.dart';
+import '../services/user_services.dart';
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  // Method to show the logout confirmation dialog
+  void showDialogbox() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text("Are you sure to logout ?"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                logout();
+              },
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("No")
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Method to handle user logout
+  void logout() {
+    UserServices().removeUserId();
+
+    // Clear the navigation stack and navigate to the login screen
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (Route<dynamic> route) => false, // This removes all the previous routes
+    );
+  }
+
+  User userdata = UserServices.userData;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0), // Height of the AppBar
+          preferredSize: const Size.fromHeight(80.0),
           child: Container(
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color:Colors.indigo,
+              color: Colors.indigo,
               borderRadius: BorderRadius.circular(16.0),
               boxShadow: [
                 BoxShadow(
@@ -23,7 +76,14 @@ class ProfilePage extends StatelessWidget {
             ),
             child: AppBar(
               backgroundColor: Colors.transparent,
-              title: const Text("User Name",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),),
+              title: Text(
+                userdata.name,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
               centerTitle: true,
               toolbarHeight: 80.0, // Adjust as needed
             ),
@@ -34,54 +94,58 @@ class ProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Profile Header
-              Stack(
-                children: [
-                  Container(
-                    height: 180,
-                    width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/profile.jpeg', // Add your image here
-                      fit: BoxFit.cover,
+              Container(
+                height: 250,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 180,
+                      width: double.infinity,
+                      child: Image.asset(
+                        userdata.profileImage, // Add your image here
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    left: MediaQuery.of(context).size.width / 2 - 50,
-                    bottom: -50,
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJrXSXb_jayac8vtbpTX_FYximkklGxSWZgA&s'), // Add your profile image URL
+                    Positioned(
+                      left: MediaQuery.of(context).size.width / 2 - 50,
+                      bottom: 0,
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                          userdata.profileImage,
+                        ), // Add your profile image URL
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: 60), // Increased spacing for a better look
-      
+              const SizedBox(height: 30), // Increased spacing for a better look
+
               // User Information Section
               Center(
                 child: Column(
                   children: [
                     Text(
-                      'RAVI KUMAR',
-                      style: TextStyle(
+                      userdata.name.toString().toUpperCase(),
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 24,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text('Department: Electronics & Communication',
+                    const SizedBox(height: 10),
+                    Text('Department: ${userdata.departmentId}',
                         style: TextStyle(fontSize: 16, color: Colors.grey[600])),
-                    Text('Batch: 2023',
+                    Text('Batch: ${userdata.batchId}',
                         style: TextStyle(fontSize: 16, color: Colors.grey[600])),
-                    SizedBox(height: 10),
-                    Text('ravi.kumar@example.com',
+                    const SizedBox(height: 10),
+                    Text(userdata.email,
                         style: TextStyle(fontSize: 16, color: Colors.grey[600])),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
-      
+
               // Buttons for Participated and Organized
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -105,8 +169,8 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30), // Increased spacing for clear separation
-      
+              const SizedBox(height: 30), // Increased spacing for clear separation
+
               // Profile Settings Section
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -122,35 +186,35 @@ class ProfilePage extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
-                      leading: Icon(Icons.security, color: Colors.indigo),
-                      title: Text('Security'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.security, color: Colors.indigo),
+                      title: const Text('Security'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Security Page
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.notifications, color: Colors.indigo),
-                      title: Text('Notifications'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.notifications, color: Colors.indigo),
+                      title: const Text('Notifications'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Notifications Page
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.lock, color: Colors.indigo),
-                      title: Text('Privacy'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.lock, color: Colors.indigo),
+                      title: const Text('Privacy'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Privacy Settings
                       },
                     ),
-      
+
                     // Support & About Section
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Support & About',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -158,27 +222,27 @@ class ProfilePage extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
-                      leading: Icon(Icons.help_outline, color: Colors.green),
-                      title: Text('Help & Support'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.help_outline, color: Colors.green),
+                      title: const Text('Help & Support'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Help & Support
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.policy, color: Colors.green),
-                      title: Text('Terms and Policies'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.policy, color: Colors.green),
+                      title: const Text('Terms and Policies'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Terms and Policies
                       },
                     ),
-      
+
                     // Actions Section
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Actions',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -186,35 +250,35 @@ class ProfilePage extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
-                      leading: Icon(Icons.report_problem, color: Colors.red),
-                      title: Text('Report a problem'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.report_problem, color: Colors.red),
+                      title: const Text('Report a problem'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Report Problem Page
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.add, color: Colors.red),
-                      title: Text('Add account'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.add, color: Colors.red),
+                      title: const Text('Add account'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // Navigate to Add Account Page
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.logout, color: Colors.red),
-                      title: Text('Log out'),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      leading: const Icon(Icons.logout, color: Colors.red),
+                      title: const Text('Log out'),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
-                        // Add logout functionality
+                        showDialogbox();
                       },
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 30), // Increased bottom padding for better UI
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -222,98 +286,3 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'package:flutter/material.dart';
-//
-// class ProfilePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Profile'),
-//         backgroundColor: Colors.transparent,
-//         elevation: 0,
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             // Profile Header
-//             Stack(
-//               alignment: Alignment.center,
-//               children: [
-//                 Image.asset(
-//                   'assets/images/profile.jpeg', // Add your image here
-//                   fit: BoxFit.cover,
-//                 ),
-//                 // Positioned(
-//                 //   top: 100,
-//                 //   child: CircleAvatar(
-//                 //     radius: 50,
-//                 //     backgroundImage: NetworkImage(
-//                 //         'https://example.com/profile_image.jpg'), // Add your profile image URL
-//                 //   ),
-//                 // ),
-//               ],
-//             ),
-//             SizedBox(height: 60),
-//
-//             // User Information Section
-//             Text(
-//               'RAVI KUMAR',
-//               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-//             ),
-//             SizedBox(height: 10),
-//             Text('Department : 1'),
-//             Text('Batch : 1'),
-//             SizedBox(height: 10),
-//             Text('ravi.kumar@example.com'),
-//             SizedBox(height: 20),
-//
-//             // Buttons for Participated and Organized
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 Column(
-//                   children: [
-//                     Icon(Icons.list_alt),
-//                     Text('Participated'),
-//                   ],
-//                 ),
-//                 Column(
-//                   children: [
-//                     Icon(Icons.event_available),
-//                     Text('Organized'),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//             SizedBox(height: 20),
-//
-//             // Logout Button
-//             ElevatedButton(
-//               onPressed: () {
-//                 // Add logout functionality
-//               },
-//               child: Text('Logout'),
-//               style: ElevatedButton.styleFrom(
-//                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -99,13 +99,14 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 8,
-              offset: Offset(0, -4), // Shadow below the BottomAppBar
+              offset: const Offset(0, -4), // Shadow below the BottomAppBar
             ),
           ],
         ),
         child: BottomAppBar(
-          color: Colors.transparent, // Use transparent to show the Container's color
-          shape: const CircularNotchedRectangle(),
+          color: Colors.transparent,
+          height: 70,// Use transparent to show the Container's color
+          shape: const CircularNotchedRectangle( ),
           notchMargin: 6.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       changeWarningMessage("Every fields are required!");
     }
     else{
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const UserDetailsScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (_)=>const UserDetailsScreen()));
     }
   }
   @override

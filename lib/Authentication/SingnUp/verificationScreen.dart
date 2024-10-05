@@ -39,11 +39,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void submission(){
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (_) =>
-            const MyHomePage(title: "Campus Vibe")));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const MyHomePage(title: "Campus Vibe")),
+          (Route<dynamic> route) => false, // This removes all the previous routes
+    );
   }
 
 

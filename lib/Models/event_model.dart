@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 class Event {
 
   final int id;
@@ -5,10 +6,9 @@ class Event {
 
   final String name;
   final String description;
-  final DateTime eventRegisterStartDate;
-  final DateTime eventRegisterEndDate;
-  final DateTime eventStartDate;
-  final DateTime eventEndDate;
+  final String eventRegisterEndDate;
+  final String eventStartDate;
+  final String eventEndDate;
   final String eventStartTime;
   final int totalParticipant;
   final int departmentId;
@@ -17,20 +17,19 @@ class Event {
   final int venueId;
 
   Event({
-    required this.id,
-    required this.mainImage,
-    required this.name,
-    required this.description,
-    required this.eventRegisterStartDate,
-    required this.eventRegisterEndDate,
-    required this.eventStartDate,
-    required this.eventEndDate,
-    required this.eventStartTime,
-    required this.totalParticipant,
-    required this.departmentId,
-    required this.categoryId,
-    required this.organizerId,
-    required this.venueId,
+     this.id=0,
+     this.mainImage="",
+     this.name="",
+     this.description="",
+     this.eventRegisterEndDate="",
+     this.eventStartDate = "",
+     this.eventEndDate  = "",
+     this.eventStartTime  = "",
+     this.totalParticipant  = 0,
+     this.departmentId  = 0,
+     this.categoryId  = 0,
+     this.organizerId = 0,
+     this.venueId = 0,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -39,10 +38,9 @@ class Event {
       mainImage: json['main_image'],
       name: json['name'],
       description: json['description'],
-      eventRegisterStartDate: DateTime.parse(json['event_register_start_date']),
-      eventRegisterEndDate: DateTime.parse(json['event_register_end_date']),
-      eventStartDate: DateTime.parse(json['event_start_date']),
-      eventEndDate: DateTime.parse(json['event_end_date']),
+      eventRegisterEndDate: json['event_register_end_date'],
+      eventStartDate: json['event_start_date'],
+      eventEndDate: json['event_end_date'],
       eventStartTime: json['event_start_time'],
       totalParticipant: json['total_participant'],
       departmentId: json['department_id'],
@@ -61,10 +59,9 @@ class Event {
 
       'name': name,
       'description': description,
-      'event_register_start_date': eventRegisterStartDate.toIso8601String(),
-      'event_register_end_date': eventRegisterEndDate.toIso8601String(),
-      'event_start_date': eventStartDate.toIso8601String(),
-      'event_end_date': eventEndDate.toIso8601String(),
+      'event_register_end_date': eventRegisterEndDate,
+      'event_start_date': eventStartDate,
+      'event_end_date': eventEndDate,
       'event_start_time': eventStartTime,
       'total_participant': totalParticipant,
       'department_id': departmentId,
