@@ -15,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeScreenState extends State<HomeScreen> {
 
+
   var events= EventServices.eventList;
   List<Category> categories=[
     Category(id: 1, name: "Technical", icon:Icons.computer_rounded ),
@@ -38,6 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _getCategoryId(String categoryName) {
     return categories.firstWhere((category) => category.name == categoryName).id;
+  }
+
+  @override
+  void initState() async{
+    super.initState();
+    await EventServices().fetchAllEvents();
   }
   @override
   Widget build(BuildContext context) {

@@ -16,7 +16,7 @@ class User with ChangeNotifier {
   int departmentId;
   String phone;
   int age;
-  int batchId;
+  String batch;
 
   User({
      this.id=0,
@@ -32,7 +32,7 @@ class User with ChangeNotifier {
      this.departmentId=0,
      this.phone='',
      this.age=0,
-     this.batchId=0,
+     this.batch="",
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -48,7 +48,7 @@ class User with ChangeNotifier {
       departmentId: json['department_id'] ?? 0, // Assign default value if null
       phone: json['phone'] ?? '',
       age: json['age'] ?? 0, // Assign default value if null
-      batchId: json['batch_id'] ?? 0,
+      batch: json['batch'] ?? 0,
       verifyEmail: '',
       token: '', // Assign default value if null
     );
@@ -69,8 +69,53 @@ class User with ChangeNotifier {
       'department_id': departmentId,
       'phone': phone,
       'age': age,
-      'batch_id': batchId,
+      'batch': batch,
     };
   }
 
+  void updateFullName(String value) {
+    name = value;
+    notifyListeners();
+  }
+
+  void updateEmail(String value){
+    email= value;
+    verifyEmail= value;
+    notifyListeners();
+  }
+
+  void updateRollNo(String value){
+    rollNo= value;
+    notifyListeners();
+  }
+
+  void updateGender(String value){
+    gender= value;
+    notifyListeners();
+  }
+
+  void setPhoneNumber(String value){
+    phone=value;
+    notifyListeners();
+  }
+
+  void updateAge(int value){
+    age=value;
+    notifyListeners();
+  }
+
+  void updateBatch(String value){
+    batch=value;
+    notifyListeners();
+  }
+
+  void setDepartment(int value){
+    departmentId= value;
+    notifyListeners();
+  }
+
+  void setPassword(String value){
+    password= value;
+    notifyListeners();
+  }
 }

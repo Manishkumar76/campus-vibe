@@ -1,4 +1,4 @@
-import 'package:campus_vibe/Authentication/SingnUp/verificationScreen.dart';
+import 'package:campus_vibe/Authentication/SingnUp/setProfilePicture.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,13 +12,21 @@ class UserDetailsScreen extends StatefulWidget {
 }
 
 class _UserDetailsScreenState extends State<UserDetailsScreen> {
-  TextEditingController businessContoller = TextEditingController();
-  TextEditingController InformalContoller = TextEditingController();
-  TextEditingController adressContoller = TextEditingController();
-  TextEditingController cityContoller = TextEditingController();
-  TextEditingController StateContoller = TextEditingController();
+  TextEditingController rollNoController = TextEditingController();
+  TextEditingController batchController = TextEditingController();
+  int? selectedDepartmentId; // Store the selected department ID here
+  List<Map<String, dynamic>> departments = [
+    {'id': 1, 'name': 'Computer Science'},
+    {'id': 2, 'name': 'Electrical Engineering'},
+    {'id': 3, 'name': 'Mechanical Engineering'},
+    {'id': 4, 'name': 'Civil Engineering'},
+    // Add more departments as needed
+  ];
 
-  var warning = "";
+  String? selectedGender; // Store the selected gender here
+  List<String> genderOptions = ['Male', 'Female', 'Other'];
+
+  String warning = "";
   void setWarning(String message) {
     setState(() {
       warning = message;
@@ -26,15 +34,16 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   }
 
   void continueToNext() {
-    if (businessContoller.text.isEmpty ||
-        InformalContoller.text.isEmpty ||
-        adressContoller.text.isEmpty ||
-        cityContoller.text.isEmpty ||
-        StateContoller.text.isEmpty ) {
-      setWarning("Every Fields are Required!");
+    if (rollNoController.text.isEmpty ||
+        selectedDepartmentId == null ||
+        batchController.text.isEmpty ||
+        selectedGender == null) {
+      setWarning("Every field is required!");
     } else {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (_) => const VerificationScreen()));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const ProfilePictureScreen()),
+      );
     }
   }
 
@@ -47,9 +56,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
           child: ListView(
             children: [
-              const SizedBox(
-                height: 100,
-              ),
+              const SizedBox(height: 100),
               const Text('Signup 2 of 3',
                   style: TextStyle(
                       fontSize: 12,
@@ -63,12 +70,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       color: Colors.black)),
               const SizedBox(height: 20),
               TextField(
-                controller: businessContoller,
+                controller: rollNoController,
                 onChanged: (value) {
-
-                  setState(() {
-                    businessContoller = value as TextEditingController;
-                  });
+                  userData.rollNo = value;
                   setWarning("");
                 },
                 decoration: InputDecoration(
@@ -83,17 +87,17 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              TextField(
-                controller: InformalContoller,
+              DropdownButtonFormField<int>(
+                value: selectedDepartmentId,
                 onChanged: (value) {
-
                   setState(() {
-                    InformalContoller = value as TextEditingController;
+                    selectedDepartmentId = value;
+                    userData.departmentId = value!; // Update userData with the selected ID
                   });
                   setWarning("");
                 },
                 decoration: InputDecoration(
-                  prefixIcon:const Icon(Icons.book),
+                  prefixIcon: const Icon(Icons.book),
                   hintText: 'Department',
                   filled: true,
                   fillColor: const Color(0xFFEAE8E4),
@@ -102,14 +106,18 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     borderSide: BorderSide.none,
                   ),
                 ),
+                items: departments.map((department) {
+                  return DropdownMenuItem<int>(
+                    value: department['id'],
+                    child: Text(department['name']),
+                  );
+                }).toList(),
               ),
               const SizedBox(height: 10),
               TextField(
-                controller: adressContoller,
+                controller: batchController,
                 onChanged: (value) {
-                  setState(() {
-                    adressContoller = value as TextEditingController;
-                  });
+                  userData.batch = value;
                   setWarning("");
                 },
                 decoration: InputDecoration(
@@ -124,12 +132,12 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              TextField(
-                controller: cityContoller,
+              DropdownButtonFormField<String>(
+                value: selectedGender,
                 onChanged: (value) {
-
                   setState(() {
-                    cityContoller = value as TextEditingController;
+                    selectedGender = value;
+                    userData.gender = value!; // Update userData with the selected gender
                   });
                   setWarning("");
                 },
@@ -143,46 +151,31 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     borderSide: BorderSide.none,
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: StateContoller,
-                onChanged: (value) {
-
-                  setState(() {
-                    StateContoller = value as TextEditingController;
-                  });
-                  setWarning("");
-                },
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.account_circle_outlined),
-                  hintText: 'Age',
-                  filled: true,
-                  fillColor: const Color(0xFFEAE8E4),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
+                items: genderOptions.map((gender) {
+                  return DropdownMenuItem<String>(
+                    value: gender,
+                    child: Text(gender),
+                  );
+                }).toList(),
               ),
               const SizedBox(height: 20),
-              Center(
-                child: warning == ""
-                    ? null
-                    : Text(
-                        warning,
-                        style: const TextStyle(fontSize: 12, color: Colors.red),
-                      ),
-              ),
-            const SizedBox( height: 40,),
+              if (warning.isNotEmpty)
+                Center(
+                  child: Text(
+                    warning,
+                    style: const TextStyle(fontSize: 12, color: Colors.red),
+                  ),
+                ),
+              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back),
+                  ),
                   SizedBox(
                     width: 150,
                     child: ElevatedButton(

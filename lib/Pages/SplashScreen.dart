@@ -60,7 +60,7 @@ class SplashScreenState extends State<SplashScreen> {
 
   void _navigateToNextScreen() {
     Future.delayed(const Duration(seconds: 2), () async{
-     await EventServices().fetchAllEvents();
+
       checkUserIsLogin();
     });
   }

@@ -1,18 +1,19 @@
 import 'package:campus_vibe/main.dart';
+import 'package:campus_vibe/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../Models/user_model.dart';
 
 
-class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({Key? key}) : super(key: key);
+class ProfilePictureScreen extends StatefulWidget {
+  const ProfilePictureScreen({Key? key}) : super(key: key);
 
   @override
-  _VerificationScreenState createState() => _VerificationScreenState();
+  _ProfilePictureScreenState createState() => _ProfilePictureScreenState();
 }
 
-class _VerificationScreenState extends State<VerificationScreen> {
+class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
   String? selectedFile= null;
    var warning="";
   Future<void> _pickFile() async {
@@ -24,11 +25,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
     if (result != null) {
       setState(() {
-        selectedFile = result.files.single.name;
+        selectedFile = result.paths.single;
       });
 
       // Update the registration proof in UserData
-      Provider.of<User>(context, listen: false);
+      Provider.of<User>(context, listen: false).profileImage = result.files.single.path!;
     }
   }
 
@@ -38,12 +39,26 @@ class _VerificationScreenState extends State<VerificationScreen> {
     });
   }
 
-  void submission(){
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const MyHomePage(title: "Campus Vibe")),
-          (Route<dynamic> route) => false, // This removes all the previous routes
-    );
+  void submission() async{
+    if(selectedFile==null){
+      setWarning("Please select a file to upload");
+    }
+    else{
+      // Upload the file to the server
+      try {
+       var user= await UserServices().addUser(Provider.of<User>(context, listen: false));
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage(title: "Campus Vibe")),
+              (Route<dynamic> route) => false, // This removes all the previous routes
+        );
+      }
+      catch(err){
+        // Once the file is uploaded, navigate to the home screen
+        setWarning("signup failed");
+      }
+    }
   }
 
 
@@ -58,9 +73,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
-
-            const SizedBox(height: 10),
+            const SizedBox(height: 60),
             const Text(
               "Signup 3 of 3",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.grey),
@@ -136,6 +149,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   width: 150,
                   child: ElevatedButton(
                     onPressed: () {
+
                       submission();
                     },
                     style: ElevatedButton.styleFrom(

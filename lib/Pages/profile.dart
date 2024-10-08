@@ -136,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height: 10),
                     Text('Department: ${userdata.departmentId}',
                         style: TextStyle(fontSize: 16, color: Colors.grey[600])),
-                    Text('Batch: ${userdata.batchId}',
+                    Text('Batch: ${userdata.batch}',
                         style: TextStyle(fontSize: 16, color: Colors.grey[600])),
                     const SizedBox(height: 10),
                     Text(userdata.email,
