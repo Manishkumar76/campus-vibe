@@ -13,11 +13,11 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController repassword= TextEditingController();
-  TextEditingController password= TextEditingController();
-  TextEditingController name= TextEditingController();
-  TextEditingController phone= TextEditingController();
-  TextEditingController email= TextEditingController();
+  final TextEditingController repassword= TextEditingController();
+ final TextEditingController password= TextEditingController();
+  final TextEditingController name= TextEditingController();
+  final TextEditingController phone= TextEditingController();
+  final TextEditingController email= TextEditingController();
   String warning="";
   void changeWarningMessage(String value){
     setState(() {
@@ -32,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       changeWarningMessage("Every fields are required!");
     }
     else{
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const UserDetailsScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (_)=>const UserDetailsScreen()));
     }
   }
   @override
@@ -96,6 +96,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextField(
                   controller: name,
                   onChanged: (value){
+                    setState(() {
+                      userData.name=value;
+                    });
 
                     if(warning!=""){
                       changeWarningMessage("");
@@ -116,7 +119,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextField(
                   controller: email,
                   onChanged: (value){
-                    userData.email=value;
+                    setState(() {
+                      userData.email=value;
+                    });
+
                     if(warning!=""){
                       changeWarningMessage("");
                     }
@@ -161,9 +167,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if(warning!=""){
                       changeWarningMessage("");
                     }
-                    userData.password=value;
+
                   setState(() {
-                  password=value as TextEditingController;
+                    userData.password=value;
                   });
                   },
                   obscureText: true,
@@ -186,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       changeWarningMessage("");
                     }
                     setState(() {
-                      repassword=value as TextEditingController;
+                    userData.password=value;
                     });
                   },
                   obscureText: true,

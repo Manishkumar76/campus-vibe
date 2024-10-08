@@ -128,10 +128,9 @@ class _AddEventPageState extends State<AddEventPage> {
         mainImage: _mainImage?.path ?? 'assets/images/placeholder.png', // Placeholder
         name: _nameController.text,
         description: _descriptionController.text,
-        eventRegisterStartDate: _eventRegisterStartDate!,
-        eventRegisterEndDate: _eventRegisterEndDate!,
-        eventStartDate: _eventStartDate!,
-        eventEndDate: _eventEndDate!,
+        eventRegisterEndDate: _eventRegisterEndDate!.toString(),
+        eventStartDate: _eventStartDate!.toString(),
+        eventEndDate: _eventEndDate!.toString(),
         eventStartTime: _eventStartTime?.format(context) ?? '09:00:00',
         totalParticipant: 0, // Placeholder, replace with actual value
         departmentId: _selectedDepartmentId ?? 0,

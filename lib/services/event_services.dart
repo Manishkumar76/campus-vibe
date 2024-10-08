@@ -7,6 +7,7 @@ import '../constant/utils.dart';
 
 class EventServices {
   static  String baseUrl = Utils.baseUrl;
+  static List<Event> eventList = [];
 
   Future<Event> fetchEventDetails(int eventId) async {
     final response = await http.get(Uri.parse('${baseUrl}events/event/$eventId'));
@@ -68,7 +69,8 @@ class EventServices {
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
-      return json.map<Event>((e) => Event.fromJson(e)).toList();
+      eventList= json.map<Event>((e) => Event.fromJson(e)).toList();
+      return eventList;
     } else {
       throw Exception('Failed to load events');
     }
