@@ -7,7 +7,7 @@ import '../../Models/user_model.dart';
 
 
 class ProfilePictureScreen extends StatefulWidget {
-  const ProfilePictureScreen({Key? key}) : super(key: key);
+  const ProfilePictureScreen({super.key});
 
   @override
   _ProfilePictureScreenState createState() => _ProfilePictureScreenState();
@@ -40,10 +40,7 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
   }
 
   void submission() async{
-    if(selectedFile==null){
-      setWarning("Please select a file to upload");
-    }
-    else{
+
       // Upload the file to the server
       try {
        var user= await UserServices().addUser(Provider.of<User>(context, listen: false));
@@ -56,9 +53,8 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
       }
       catch(err){
         // Once the file is uploaded, navigate to the home screen
-        setWarning("signup failed");
+        setWarning("signup failed ${err}");
       }
-    }
   }
 
 
