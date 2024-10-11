@@ -167,10 +167,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if(warning!=""){
                       changeWarningMessage("");
                     }
-
-                  setState(() {
-                    userData.password=value;
-                  });
                   },
                   obscureText: true,
                   decoration: InputDecoration(
@@ -191,9 +187,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if(warning!=""){
                       changeWarningMessage("");
                     }
-                    setState(() {
-                    userData.password=value;
-                    });
                   },
                   obscureText: true,
                   decoration: InputDecoration(
