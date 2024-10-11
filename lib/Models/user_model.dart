@@ -1,4 +1,8 @@
-class User {
+
+
+import 'package:flutter/material.dart';
+
+class User with ChangeNotifier {
   int id;
   String profileImage;
   String name;
@@ -12,43 +16,24 @@ class User {
   int departmentId;
   String phone;
   int age;
-  int batchId;
+  String batch;
 
   User({
-    required this.id,
-    required this.profileImage,
-    required this.name,
-    required this.email,
-    required this.verifyEmail,
-    required this.token,
-    required this.password,
-    required this.rollNo,
-    required this.userType,
-    required this.gender,
-    required this.departmentId,
-    required this.phone,
-    required this.age,
-    required this.batchId,
+     this.id=0,
+     this.profileImage='',
+     this.name ="",
+    this.email= '',
+     this.verifyEmail=  '',
+     this.token='',
+    this.password='',
+     this.rollNo='',
+     this.userType='',
+     this.gender='',
+     this.departmentId=0,
+     this.phone='',
+     this.age=0,
+     this.batch="",
   });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'profile_image': profileImage,
-      'name': name,
-      'email': email,
-      'verify_email': verifyEmail,
-      'token': token,
-      'password': password,
-      'roll_no': rollNo,
-      'user_type': userType,
-      'gender': gender,
-      'department_id': departmentId,
-      'phone': phone,
-      'age': age,
-      'batch_id': batchId,
-    };
-  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -63,10 +48,74 @@ class User {
       departmentId: json['department_id'] ?? 0, // Assign default value if null
       phone: json['phone'] ?? '',
       age: json['age'] ?? 0, // Assign default value if null
-      batchId: json['batch_id'] ?? 0,
+      batch: json['batch'] ?? 0,
       verifyEmail: '',
       token: '', // Assign default value if null
     );
   }
 
+  Map<String, dynamic> toJson(){
+    return {
+      'id': id,
+      'profile_image': profileImage,
+      'name': name,
+      'email': email,
+      'verify_email': verifyEmail,
+      'token': token,
+      'password': password,
+      'roll_no': rollNo,
+      'user_type': userType,
+      'gender':gender,
+      'department_id': departmentId,
+      'phone': phone,
+      'age': age,
+      'batch': batch,
+    };
+  }
+
+  void updateFullName(String value) {
+    name = value;
+    notifyListeners();
+  }
+
+  void updateEmail(String value){
+    email= value;
+    verifyEmail= value;
+    notifyListeners();
+  }
+
+  void updateRollNo(String value){
+    rollNo= value;
+    notifyListeners();
+  }
+
+  void updateGender(String value){
+    gender= value;
+    notifyListeners();
+  }
+
+  void setPhoneNumber(String value){
+    phone=value;
+    notifyListeners();
+  }
+
+  void updateAge(int value){
+    age=value;
+    notifyListeners();
+  }
+
+  void updateBatch(String value){
+    batch=value;
+    notifyListeners();
+  }
+
+  void setDepartment(int value){
+    departmentId= value;
+    notifyListeners();
+  }
+
+  void setPassword(String value){
+    password= value;
+    notifyListeners();
+  }
 }

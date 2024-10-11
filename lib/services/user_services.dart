@@ -3,10 +3,12 @@ import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/user_model.dart';
+import '../Pages/SplashScreen.dart';
 import '../constant/utils.dart';
 
 
 class UserServices {
+  static User userData= new User();
   String baseUrl = Utils.baseUrl;
 
   Future<User> addUser(User user) async {
@@ -42,8 +44,8 @@ class UserServices {
   }
   void removeUserId() async {
     final sp = await SharedPreferences.getInstance();
-    // sp.remove(SplashScreenState.KeyLogin);
-    sp.remove('user_id');
+    sp.remove(SplashScreenState.loginKey);
+    sp.remove('userId');
   }
   Future<List<User>> getUsers() async {
     final response = await http.get(Uri.parse('${baseUrl}user/getusers'));
@@ -61,8 +63,8 @@ class UserServices {
 
     if (response.statusCode == 200) {
       print(User.fromJson(jsonDecode(response.body)));
-
-      return User.fromJson(jsonDecode(response.body));
+        userData= User.fromJson(jsonDecode(response.body));
+      return userData;
     } else {
       throw Exception('Failed to load user');
     }

@@ -1,18 +1,42 @@
+import 'package:campus_vibe/Authentication/Login/loginScreen.dart';
+import 'package:campus_vibe/services/event_services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:campus_vibe/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../services/user_services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends State<SplashScreen> {
   final String _text = "Campus Vibe";
   String _displayText = "";
   int _currentIndex = 0;
   Timer? _typingTimer;
+  bool? isLogin= false;
+  static var loginKey="isLogin";
 
+   void checkUserIsLogin() async{
+     SharedPreferences sp= await SharedPreferences.getInstance();
+     setState(() {
+       isLogin= sp.getBool(loginKey);
+     });
+     if(isLogin==true){
+       try{
+         await UserServices().getUserById(sp.getInt("userId")!);
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const MyHomePage(title: "Campus Vibe")));
+
+     }catch(e){
+         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const LoginScreen()));;}
+     }
+     else{
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const LoginScreen()));
+     }
+   }
   @override
   void initState() {
     super.initState();
@@ -35,8 +59,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>  const MyHomePage( title: 'Campus Vibe')));
+    Future.delayed(const Duration(seconds: 2), () async{
+
+      checkUserIsLogin();
     });
   }
 

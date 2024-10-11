@@ -2,13 +2,19 @@ import 'package:campus_vibe/Pages/EventListPage.dart';
 import 'package:campus_vibe/Pages/live.dart';
 import 'package:campus_vibe/Pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'Models/user_model.dart';
 import 'Pages/SplashScreen.dart';
 import 'Pages/addNewEvent.dart';
 import 'Pages/profile.dart';
 import 'Pages/search.dart';
 
 void main() {
-  runApp(const MyApp());
+
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => User(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -93,13 +99,14 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 8,
-              offset: Offset(0, -4), // Shadow below the BottomAppBar
+              offset: const Offset(0, -4), // Shadow below the BottomAppBar
             ),
           ],
         ),
         child: BottomAppBar(
-          color: Colors.transparent, // Use transparent to show the Container's color
-          shape: const CircularNotchedRectangle(),
+          color: Colors.transparent,
+          height: 70,// Use transparent to show the Container's color
+          shape: const CircularNotchedRectangle( ),
           notchMargin: 6.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
